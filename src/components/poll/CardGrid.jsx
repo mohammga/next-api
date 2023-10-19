@@ -8,7 +8,7 @@ function CardGrid({ data, title }) {
       </h1>
       <div className="flex flex-wrap">
         {data.map((poll, index) => (
-          <Card key={index} id={poll.id} title={poll.title} description={poll.description} />
+          <Card key={index} id={poll.id} title={poll.title} description={poll.description} createdAt={poll.createdAt} />
         ))}
       </div>
     </div>

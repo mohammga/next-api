@@ -14,6 +14,8 @@ function PollDashboard() {
       .then(data => setMyPolls(data));
   }, []);
 
+  console.log(myPolls);
+
   return (
     <div>
       <CardGrid data={myPolls.map(poll => poll)} title={"Pollify Samfunnet"} />

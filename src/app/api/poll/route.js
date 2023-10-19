@@ -8,6 +8,7 @@ export async function GET(req) {
                 id: true,
                 title: true,
                 description: true,
+                createdAt: true,
             },
         });
         
