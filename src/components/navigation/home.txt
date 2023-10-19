@@ -1,0 +1,22 @@
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button/";
+
+function HomeNavigation() {
+  return (
+    <nav className="bg-white p-4">
+      <div className="w-full flex justify-between items-center">
+        <Link href={"/"}>
+          <h1 className="text-2xl text-black font-semibold">Poll</h1>
+        </Link>
+
+        <div className="space-x-4">
+          <Link href={"/signup"} className={buttonVariants()}>
+            Opprett konto
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+export default HomeNavigation;
