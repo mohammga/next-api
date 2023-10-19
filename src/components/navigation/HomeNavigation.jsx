@@ -23,7 +23,7 @@ export default function HomeNavigation() {
         <div className="flex h-16 items-center justify-between py-6">
           <div className="flex gap-6 md:gap-10 items-center">
             <Link href="/" className="items-center space-x-2 flex">
-              <span className="text-xl font-bold inline-block">Poll</span>
+              <span className="text-xl font-bold inline-block">Pollify</span>
             </Link>
           </div>
 
