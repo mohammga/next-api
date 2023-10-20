@@ -9,12 +9,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { PlusIcon, TrashIcon } from "@radix-ui/react-icons"
 
-export default function QuestionForm({ handelDelete, handleSavePoll, pollTitle, polls, handleQuestionChange, handleOptionChange, addOption, addQuestion }) {
+export default function QuestionForm({ handelDelete,handleSavePoll, pollTitle, polls, handleQuestionChange, handleOptionChange, addOption, addQuestion }) {
   return (
     <div className="flex mx-auto w-4/12 flex-col gap-4 border-none shadow-none">
-      <CardHeader>
-        <CardTitle className="text-3xl font-bold mb-4">{pollTitle}</CardTitle>
-      </CardHeader>
+
 
       {polls.map((question, questionIndex) => (
         <CardContent key={questionIndex} className="mb-4">

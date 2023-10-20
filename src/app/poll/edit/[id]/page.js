@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import EditPoll from '@/components/poll/editPoll';
-import QuestionForm from '@/components/poll/QuestionForm'
+import EditQuestionForm from '@/components/poll/EditQuestionForm'
 import PollResult from '@/components/poll/PollResult';
 
 export default function Page() {
@@ -10,6 +10,19 @@ export default function Page() {
   const [pollDescription, setPollDescription] = useState('');
   const [showResult, setShowResult] = useState(false);
   const [pollURL, setPollURL] = useState('');
+
+  const handelDelete = (type, questionIndex, optionIndex) => {
+    if (type === 'question') {
+      const updatedPolls = [...polls];
+      updatedPolls.splice(questionIndex, 1);
+      setPolls(updatedPolls);
+    } else if (type === 'option') {
+      const updatedPolls = [...polls];
+      updatedPolls[questionIndex].answerOptions.splice(optionIndex, 1);
+      setPolls(updatedPolls);
+    }
+  };
+  
 
   const nextStep = () => {
     setCurrentStep(currentStep + 1);
@@ -90,13 +103,15 @@ export default function Page() {
           nextStep={nextStep} />
     
         <div>
-          <QuestionForm pollTitle={pollTitle}
+          <EditQuestionForm pollTitle={pollTitle}
             handleSavePoll={handleSavePoll}
             polls={polls}
             handleOptionChange={handleOptionChange}
             handleQuestionChange={handleQuestionChange}
             addOption={addOption}
+            handelDelete = {handelDelete}
             addQuestion={addQuestion} />
+            
         </div>
       {showResult && (
         <PollResult pollURL={pollURL} />

@@ -12,6 +12,18 @@ export default function CreatePoll() {
   const [showResult, setShowResult] = useState(false);
   const [pollURL, setPollURL] = useState('');
 
+  const handelDelete = (type, questionIndex, optionIndex) => {
+    if (type === 'question') {
+      const updatedPolls = [...polls];
+      updatedPolls.splice(questionIndex, 1);
+      setPolls(updatedPolls);
+    } else if (type === 'option') {
+      const updatedPolls = [...polls];
+      updatedPolls[questionIndex].answerOptions.splice(optionIndex, 1);
+      setPolls(updatedPolls);
+    }
+  };
+
   const nextStep = () => {
     setCurrentStep(currentStep + 1);
   };
@@ -93,6 +105,7 @@ export default function CreatePoll() {
       {currentStep === 2 && !showResult && (
         <div>
           <QuestionForm pollTitle={pollTitle}
+            handelDelete={handelDelete}
             handleSavePoll={handleSavePoll}
             polls={polls}
             handleOptionChange={handleOptionChange}
