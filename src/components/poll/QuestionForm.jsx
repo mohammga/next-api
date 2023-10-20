@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-
 import { PlusIcon } from "@radix-ui/react-icons"
 
 export default function QuestionForm({ handleSavePoll, pollTitle, polls, handleQuestionChange, handleOptionChange, addOption, addQuestion }) {
