@@ -43,7 +43,7 @@ export default function CreatePoll() {
     // 1. Structure your poll data.
     const pollData = {
       title: pollTitle,
-      authorId: 'clnt69ng60001t3sokmarhl6k',
+      authorId: 'clnxz8qef0000t3t4pydc7djh',
       description: pollDescription,
       questions: polls.map(poll => ({
         title: poll.title,
