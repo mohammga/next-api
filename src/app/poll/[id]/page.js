@@ -1,15 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import Quiz from "@/components/poll/Poll";
+import Poll from "@/components/poll/Poll";
 import Result from "@/components/poll/Result";
 import { useRouter, useParams } from "next/navigation";
 
-export default function Poll() {
+export default function Page() {
   const [isFinished, setIsFinished] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
   const [pollData, setPollData] = useState(null);
   const [hasError, setHasError] = useState(false);
+  
   const router = useRouter();
   const params = useParams();
   const { id } = params;
@@ -26,15 +27,15 @@ export default function Poll() {
   };
 
   useEffect(() => {
-    fetch(`/api/poll/get?pollId=${id}`)
+    fetch(`/api/polls/${id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Poll not found');
         }
         return response.json();
       })
-      .then(data => {
-        setPollData(data);
+      .then(poll => {
+        setPollData(poll.data);
       })
       .catch(error => {
         console.error('Failed to fetch poll data:', error);
@@ -48,7 +49,7 @@ export default function Poll() {
         <p>Pollen du prøver å få tilgang til eksisterer ikke.</p>
       ) : pollData ? (
         !isFinished ? (
-          <Quiz data={pollData} onFinish={handleFinish} />
+          <Poll data={pollData} onFinish={handleFinish} />
         ) : (
           <Result
             questions={pollData}

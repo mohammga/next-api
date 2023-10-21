@@ -8,13 +8,19 @@ function PollDashboard() {
   const [completedPolls, setCompletedPolls] = useState([]);
 
   useEffect(() => {
-    // Fetch my polls from the API
-    fetch('/api/poll')  // Adjust the URL if your endpoint is different
-      .then(response => response.json())
-      .then(data => setMyPolls(data));
+    fetch('/api/polls')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then(polls => setMyPolls(polls.data))
+      .catch(error => console.error('There was a problem with the fetch operation:', error.message));
   }, []);
+  
+  
 
-  console.log(myPolls);
 
   return (
     <div>

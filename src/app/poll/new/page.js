@@ -4,6 +4,7 @@ import PollStart from "@/components/poll/PollStart"
 import QuestionForm from '@/components/poll/QuestionForm';
 import PollResult from '@/components/poll/PollResult';
 
+
 export default function CreatePoll() {
   const [polls, setPolls] = useState([{ title: '', description: '', answerOptions: [''] }]);
   const [pollTitle, setPollTitle] = useState('');
@@ -43,7 +44,7 @@ export default function CreatePoll() {
     // 1. Structure your poll data.
     const pollData = {
       title: pollTitle,
-      authorId: 'clnt69ng60001t3sokmarhl6k',
+      email: 'bob.smith@example.com',
       description: pollDescription,
       questions: polls.map(poll => ({
         title: poll.title,
@@ -55,7 +56,7 @@ export default function CreatePoll() {
   
     // 2. Use the Fetch API to make a POST request.
     try {
-      const response = await fetch('/api/poll/new', {
+      const response = await fetch('/api/polls/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -64,13 +65,15 @@ export default function CreatePoll() {
       });
   
       const responseData = await response.json();
+
+      console.log('responseData', responseData);
   
       // 3. Handle the API response and update the UI.
       if (response.ok) {
         setShowResult(true);
         // You might want to generate the poll URL based on the received ID or some other logic.
         // For now, I'm assuming the poll URL structure is `/poll/{id}`
-        setPollURL(`/poll/${responseData.poll.id}`);
+        setPollURL(`/poll/${responseData.data.id}`);
       } else {
         // Handle errors. You can show an error message to the user, for example.
         console.error('Failed to save the poll:', responseData.error);
@@ -79,6 +82,8 @@ export default function CreatePoll() {
       console.error('An error occurred:', error);
     }
   };
+
+  console.log('polls', polls);
   
   return (
     <div className="p-4">

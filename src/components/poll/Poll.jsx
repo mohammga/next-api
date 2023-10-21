@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -18,6 +19,7 @@ function Poll({ data, onFinish }) {
     if (currentIndex < data.questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
+      handleSubmit();
       onFinish(selected);
     }
   };
@@ -33,6 +35,47 @@ function Poll({ data, onFinish }) {
     newSelected[currentIndex] = index;
     setSelected(newSelected);
   };
+
+  const handleSubmit = async () => {
+    // Assuming you have a user ID. 
+    // TODO: Fetch this value properly, possibly from a user context or authentication.
+    const userId = "clnt69nie0002t3sox09fe9ie";
+  
+    // Preparing data to send to the backend
+    const answersData = {
+      pollId: data.id,
+      userId: userId,
+      answers: selected.map((choiceIndex, questionIndex) => ({
+        questionId: data.questions[questionIndex].id,
+        optionId: data.questions[questionIndex].options[choiceIndex].id
+      }))
+    };
+
+    console.log('Selected:', selected);
+
+    console.log('Submitting answers:', answersData);
+  
+    // Send data to backend
+    try {
+      const response = await fetch('/api/answer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(answersData),
+      });
+  
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error);
+      }
+  
+      console.log('Answers saved successfully:', result);
+    } catch (error) {
+      console.error('Failed to submit answers:', error);
+    }
+  };
+  
 
   return (
   <Card className="flex flex-col items-center justify-center p-8 min-h-screen">
@@ -50,7 +93,7 @@ function Poll({ data, onFinish }) {
           <input
             type="radio"
             name="quiz-answer"
-            value={index}
+            value={option.id}
             checked={selected[currentIndex] === index}
             onChange={() => handleChoice(index)}
             required

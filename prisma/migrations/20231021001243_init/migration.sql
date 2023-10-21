@@ -12,7 +12,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Poll" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "description" TEXT,
+    "description" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "authorId" TEXT NOT NULL,
@@ -53,25 +53,14 @@ CREATE TABLE "ConductedPoll" (
 CREATE TABLE "Answer" (
     "id" TEXT NOT NULL,
     "conductedPollId" TEXT NOT NULL,
+    "questionId" TEXT NOT NULL,
     "optionId" TEXT NOT NULL,
 
     CONSTRAINT "Answer_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
-CREATE TABLE "_ConductedPollToQuestion" (
-    "A" TEXT NOT NULL,
-    "B" TEXT NOT NULL
-);
-
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "_ConductedPollToQuestion_AB_unique" ON "_ConductedPollToQuestion"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_ConductedPollToQuestion_B_index" ON "_ConductedPollToQuestion"("B");
 
 -- AddForeignKey
 ALTER TABLE "Poll" ADD CONSTRAINT "Poll_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -92,10 +81,7 @@ ALTER TABLE "ConductedPoll" ADD CONSTRAINT "ConductedPoll_userId_fkey" FOREIGN K
 ALTER TABLE "Answer" ADD CONSTRAINT "Answer_conductedPollId_fkey" FOREIGN KEY ("conductedPollId") REFERENCES "ConductedPoll"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Answer" ADD CONSTRAINT "Answer_questionId_fkey" FOREIGN KEY ("questionId") REFERENCES "Question"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Answer" ADD CONSTRAINT "Answer_optionId_fkey" FOREIGN KEY ("optionId") REFERENCES "Option"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_ConductedPollToQuestion" ADD CONSTRAINT "_ConductedPollToQuestion_A_fkey" FOREIGN KEY ("A") REFERENCES "ConductedPoll"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_ConductedPollToQuestion" ADD CONSTRAINT "_ConductedPollToQuestion_B_fkey" FOREIGN KEY ("B") REFERENCES "Question"("id") ON DELETE CASCADE ON UPDATE CASCADE;
