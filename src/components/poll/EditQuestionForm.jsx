@@ -25,7 +25,7 @@ export default function QuestionForm({ handelDelete,handleSavePoll, pollTitle, p
               value={question.title}
               onChange={(e) => handleQuestionChange(questionIndex, 'title', e.target.value)}
             />
-            <Button onClick={() => handelDelete('question', questionIndex)} variant="secondary">
+            <Button onClick={() => handelDelete('question', questionIndex)} variant="destructive">
               <TrashIcon />
             </Button>
           </div>
@@ -44,7 +44,7 @@ export default function QuestionForm({ handelDelete,handleSavePoll, pollTitle, p
                 onChange={(e) => handleOptionChange(questionIndex, optionIndex, e.target.value)}
                 key={optionIndex}
               />
-              <Button onClick={() => handelDelete('option', questionIndex, optionIndex)} variant="secondary">
+              <Button onClick={() => handelDelete('option', questionIndex, optionIndex)} variant="destructive">
                 <TrashIcon />
               </Button>
             </div>

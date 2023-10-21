@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import EditPoll from '@/components/poll/editPoll';
+import EditPoll from '@/components/poll/EditPoll';
 import EditQuestionForm from '@/components/poll/EditQuestionForm'
 import PollResult from '@/components/poll/PollResult';
 
