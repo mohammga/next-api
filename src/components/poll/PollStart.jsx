@@ -4,15 +4,15 @@ import {
   CardHeader,
   CardTitle,
 }
-from "@/components/ui/card"
+  from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button"
 
 export default function PollStart({ pollTitle, setPollTitle, pollDescription, setPollDescription, nextStep }) {
 
-    return (
-      <Card className="flex mx-auto w-4/12 flex-col gap-4 border-none shadow-none">
+  return (
+    <Card className="flex mx-auto w-4/12 flex-col gap-4 border-none shadow-none">
       <CardHeader>
         <CardTitle className="text-3xl font-semibold mb-8">Opprett en Poll</CardTitle>
       </CardHeader>
@@ -20,14 +20,14 @@ export default function PollStart({ pollTitle, setPollTitle, pollDescription, se
         <Label className="block text-sm font-bold mb-2">Tittel:</Label>
         <Input
           type="text"
-          className="w-full border rounded py-2 px-3"
+          className="w-full border rounded py-2 px-3 mb-4" // Add margin-bottom
           value={pollTitle}
           onChange={(e) => setPollTitle(e.target.value)}
         />
         <Label className="block text-sm font-bold mb-2">Beskrivelse:</Label>
         <Input
           type="text"
-          className="w-full border rounded py-2 px-3"
+          className="w-full border rounded py-2 px-3 mb-4" // Add margin-bottom
           value={pollDescription}
           onChange={(e) => setPollDescription(e.target.value)}
         />
@@ -36,8 +36,9 @@ export default function PollStart({ pollTitle, setPollTitle, pollDescription, se
         </Button>
       </CardContent>
     </Card>
-    );
-  }
+
+  );
+}
 
 
 

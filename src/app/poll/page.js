@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import CardGrid from "@/components/poll/CardGrid";
+import EditPoll from '@/components/poll/EditPoll';
+import PollResult from '@/components/poll/PollResult';
 
 function PollDashboard() {
   const [myPolls, setMyPolls] = useState([]);
