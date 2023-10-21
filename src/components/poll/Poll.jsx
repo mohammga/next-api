@@ -57,7 +57,7 @@ function Poll({ data, onFinish }) {
   
     // Send data to backend
     try {
-      const response = await fetch('/api/poll/answer', {
+      const response = await fetch('/api/answer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -12,15 +12,15 @@ export default function Poll() {
   const { id } = params;
 
   useEffect(() => {
-      fetch(`/api/poll/get?pollId=${id}`)
+      fetch(`/api/polls/${id}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Poll not found');
           }
           return response.json();
         })
-        .then(data => {
-          setPollData(data);
+        .then(poll => {
+          setPollData(poll.data);
         })
         .catch(error => {
           console.error('Failed to fetch poll data:', error);

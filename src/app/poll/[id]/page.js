@@ -10,6 +10,7 @@ export default function Page() {
   const [userAnswers, setUserAnswers] = useState([]);
   const [pollData, setPollData] = useState(null);
   const [hasError, setHasError] = useState(false);
+  
   const router = useRouter();
   const params = useParams();
   const { id } = params;
@@ -26,15 +27,15 @@ export default function Page() {
   };
 
   useEffect(() => {
-    fetch(`/api/poll/get?pollId=${id}`)
+    fetch(`/api/polls/${id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Poll not found');
         }
         return response.json();
       })
-      .then(data => {
-        setPollData(data);
+      .then(poll => {
+        setPollData(poll.data);
       })
       .catch(error => {
         console.error('Failed to fetch poll data:', error);
