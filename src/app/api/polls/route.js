@@ -13,3 +13,7 @@ export async function POST(req, res) {
 //PUT
 
 //DELETE
+export async function DELETE(req, { params }) {
+  const response = await pollsController.deletePoll(req, params);
+  return response;
+}

@@ -70,4 +70,30 @@ export const createPoll = async (req) => {
 
 //PUT
 
+
+
 //DELETE
+export const deletePoll = async (req, { params }) => {
+  const pollId = params.id;
+
+  if (!pollId) {
+    return new Response(JSON.stringify({
+      success: false,
+      error: "Missing required parameter: pollId",
+    }), { status: 400 });
+  }
+
+  const deleteResult = await pollsService.removePoll(pollId);
+
+  if (deleteResult.success) {
+    return new Response(JSON.stringify({
+      success: true,
+      message: "Poll deleted successfully."
+    }), { status: 200 });
+  } else {
+    return new Response(JSON.stringify({
+      success: false,
+      error: deleteResult.error,
+    }), { status: 500 });
+  }
+}

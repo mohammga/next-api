@@ -116,7 +116,7 @@ export default function CreatePoll() {
             handleOptionChange={handleOptionChange}
             handleQuestionChange={handleQuestionChange}
             addOption={addOption}
-            addQuestion={addQuestion} />
+            addQuestion={addQuestion}/>
         </div>
       )}
       {showResult && (

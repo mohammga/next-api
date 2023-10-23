@@ -1,6 +1,7 @@
 import Card from "./Cards";
 
-function CardGrid({ data, title }) {
+function CardGrid({ data, title}) {
+
   return (
     <div>
       <h1 className="p-4 text-xl font-semibold">
