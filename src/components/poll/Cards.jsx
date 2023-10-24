@@ -46,7 +46,7 @@ function Cards({ id, title, description, createdAt }) {
   const router = useRouter();
 
   const handleView = () => {
-    router.push(`/poll/view/${id}`);
+    router.push(`/poll/${id}`);
 
   };
 

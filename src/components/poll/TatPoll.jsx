@@ -36,10 +36,6 @@ function getRandomColor() {
 function TatPoll ({ id, title, description, createdAt }) {
   const router = useRouter();
 
-  const handleView = () => {
-    router.push(`/poll/view/${id}`);
-
-  };
 
   const formattedDate = format(new Date(createdAt), "PPP", { locale: nb });
 
