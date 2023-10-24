@@ -1,10 +1,8 @@
 "use client";
 
-
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
 import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,11 +36,13 @@ function getRandomColor() {
     "bg-amber-500",
     "bg-gray-500",
   ];
+
+  
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
 }
 
-function Cards({ id, title, description, createdAt }) {
+function SePoll({ id, title, description, createdAt }) {
   const router = useRouter();
 
   const handleView = () => {
@@ -73,7 +73,7 @@ function Cards({ id, title, description, createdAt }) {
         <CardFooter className="items-start flex flex-col space-y-4">
           <Button variant="secondary" onClick={handleView} className="w-full">
             <OpenInNewWindowIcon className="h-4 w-4 mr-2" />
-            Ta poll
+            Se Poll
           </Button>
         </CardFooter>
       </Card>
@@ -82,4 +82,4 @@ function Cards({ id, title, description, createdAt }) {
   );
 }
 
-export default Cards;
+export default SePoll;

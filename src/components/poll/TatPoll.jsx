@@ -1,26 +1,15 @@
 "use client";
 
-
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-
-import { buttonVariants } from "@/components/ui/button";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
  "@/components/ui/alert-dialog";
 
-import {
-  Pencil1Icon,
-  TrashIcon,
-  OpenInNewWindowIcon,
-} from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import { nb } from "date-fns/locale"; // Import Norwegian locale
 function getRandomColor() {
@@ -38,11 +27,13 @@ function getRandomColor() {
     "bg-amber-500",
     "bg-gray-500",
   ];
+
+  
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
 }
 
-function Cards({ id, title, description, createdAt }) {
+function TatPoll ({ id, title, description, createdAt }) {
   const router = useRouter();
 
   const handleView = () => {
@@ -70,16 +61,10 @@ function Cards({ id, title, description, createdAt }) {
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
-        <CardFooter className="items-start flex flex-col space-y-4">
-          <Button variant="secondary" onClick={handleView} className="w-full">
-            <OpenInNewWindowIcon className="h-4 w-4 mr-2" />
-            Ta poll
-          </Button>
-        </CardFooter>
       </Card>
     </div>
 
   );
 }
 
-export default Cards;
+export default TatPoll;

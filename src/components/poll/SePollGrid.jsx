@@ -1,6 +1,6 @@
-import Card from "./Cards";
+import SePoll from "./SePoll";
 
-function CardGrid({ data, title }) {
+function SePollGrid({ data, title }) {
 
   return (
     <div>
@@ -9,11 +9,11 @@ function CardGrid({ data, title }) {
       </h1>
       <div className="flex flex-wrap">
         {data.map((poll, index) => (
-          <Card key={index} id={poll.id} title={poll.title} description={poll.description} createdAt={poll.createdAt} />
+          <SePoll key={index} id={poll.id} title={poll.title} description={poll.description} createdAt={poll.createdAt} />
         ))}
       </div>
     </div>
   );
 }
 
-export default CardGrid;
+export default SePollGrid;

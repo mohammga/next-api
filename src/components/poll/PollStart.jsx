@@ -39,8 +39,3 @@ export default function PollStart({ pollTitle, setPollTitle, pollDescription, se
 
   );
 }
-
-
-
-
-

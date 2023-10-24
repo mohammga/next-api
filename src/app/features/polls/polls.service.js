@@ -58,19 +58,3 @@ export const create = async ({ title, description, questions, email }) => {
 
   return { success: true, data: createdPoll.data }
 }
-
-// delete
-
-export const removePoll = async (pollId) => {
-  try {
-    const deletedPoll = await pollsRepo.remove(pollId);
-
-    if (deletedPoll.success) {
-      return { success: true, data: deletedPoll.data };
-    } else {
-      return { success: false, error: "Failed to delete poll" };
-    }
-  } catch (error) {
-    return { success: false, error: "An error occurred while deleting the poll." };
-  }
-}

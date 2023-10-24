@@ -45,6 +45,7 @@ model Option {
   answers    Answer[]
 }
 
+
 model ConductedPoll {
   id        String   @id @default(cuid())
   pollId    String

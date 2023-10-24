@@ -27,8 +27,22 @@ export default function PollNavigation() {
           <div className="flex items-center space-x-4">
 
           <Link className="hover:underline" href={"/poll/new"}>
+            Mine poll
+          </Link>
+
+          <Link className="hover:underline" href={"/poll/new"}>
+            Gjennomførte poll
+          </Link>
+
+          <Link className="hover:underline" href={"/poll/new"}>
+            Pollify Sammfunet
+          </Link>
+
+          <Link className="hover:underline" href={"/poll/new"}>
             Lag poll
           </Link>
+
+
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

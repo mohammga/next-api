@@ -98,18 +98,3 @@ export const findUnique = async (identifier) => {
     return { success: false, error: 'Failed finding poll' }
   }
 }
-
-export const remove = async (pollId) => {
-  try {
-    const deletedPoll = await prisma.poll.delete({
-      where: {
-        id: pollId,
-      },
-    });
-
-    return { success: true, data: deletedPoll };
-  } catch (error) {
-    return { success: false, error: "Failed to delete the poll" };
-  }
-}
-

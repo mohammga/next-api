@@ -9,11 +9,3 @@ export async function POST(req, res) {
   const response = await pollsController.createPoll(req, res);
   return response;
 }
-
-//PUT
-
-//DELETE
-export async function DELETE(req, { params }) {
-  const response = await pollsController.deletePoll(req, params);
-  return response;
-}
