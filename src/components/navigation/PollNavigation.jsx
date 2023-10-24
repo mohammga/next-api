@@ -15,11 +15,11 @@ export default function PollNavigation() {
   const { setTheme } = useTheme();
 
   return (
-    <section className="w-full border-b border-border">
-      <header className="container">
+    <section className="w-full sm:px-4 md:px-6 lg:px-8 border-b border-border">
+      <header className="container p-0">
         <div className="flex h-16 items-center justify-between py-6">
           <div className="flex gap-6 md:gap-10 items-center">
-            <Link href="/poll" className="items-center space-x-2 flex">
+            <Link href="/" className="items-center space-x-2 flex">
               <span className="text-xl font-bold inline-block">Pollify</span>
             </Link>
           </div>
@@ -53,7 +53,7 @@ export default function PollNavigation() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button>Logg ut</Button>
+            <Button>Logg inn</Button>
           </div>
         </div>
       </header>
