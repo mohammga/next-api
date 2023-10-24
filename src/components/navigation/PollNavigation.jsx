@@ -1,15 +1,23 @@
-"use client"
+"use client";
 
 import Link from "next/link";
-import { MoonIcon, SunIcon, LaptopIcon } from "@radix-ui/react-icons";
-import { useTheme } from 'next-themes';
-import { 
-  DropdownMenu, 
+import { MoonIcon, SunIcon, LaptopIcon, PlusIcon } from "@radix-ui/react-icons";
+import { useTheme } from "next-themes";
+import {
+  DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem, 
-  DropdownMenuTrigger 
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function PollNavigation() {
   const { setTheme } = useTheme();
@@ -25,10 +33,24 @@ export default function PollNavigation() {
           </div>
 
           <div className="flex items-center space-x-4">
-
-          <Link className="hover:underline" href={"/poll/new"}>
-            Lag poll
-          </Link>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    href={"/poll/new"}
+                    className={buttonVariants({
+                      variant: "outline",
+                      size: "icon",
+                    })}
+                  >
+                    <PlusIcon className="h-[1.2rem] w-[1.2rem]" />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Legg til poll</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -39,15 +61,15 @@ export default function PollNavigation() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme('light')}>
+                <DropdownMenuItem onClick={() => setTheme("light")}>
                   <SunIcon className="mr-2 h-4 w-4" /> Lyst
                 </DropdownMenuItem>
 
-                <DropdownMenuItem onClick={() => setTheme('dark')}>
+                <DropdownMenuItem onClick={() => setTheme("dark")}>
                   <MoonIcon className="mr-2 h-4 w-4" /> Mørkt
                 </DropdownMenuItem>
 
-                <DropdownMenuItem onClick={() => setTheme('system')}>
+                <DropdownMenuItem onClick={() => setTheme("system")}>
                   <LaptopIcon className="mr-2 h-4 w-4" /> System
                 </DropdownMenuItem>
               </DropdownMenuContent>

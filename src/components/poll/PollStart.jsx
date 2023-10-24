@@ -20,14 +20,14 @@ export default function PollStart({ pollTitle, setPollTitle, pollDescription, se
         <Label className="block text-sm font-bold mb-2">Tittel:</Label>
         <Input
           type="text"
-          className="w-full border rounded py-2 px-3 mb-4" // Add margin-bottom
+          className="w-full border rounded py-2 px-3 mb-4"
           value={pollTitle}
           onChange={(e) => setPollTitle(e.target.value)}
         />
         <Label className="block text-sm font-bold mb-2">Beskrivelse:</Label>
         <Input
           type="text"
-          className="w-full border rounded py-2 px-3 mb-4" // Add margin-bottom
+          className="w-full border rounded py-2 px-3 mb-4"
           value={pollDescription}
           onChange={(e) => setPollDescription(e.target.value)}
         />
