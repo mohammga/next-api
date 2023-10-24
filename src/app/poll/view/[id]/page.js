@@ -35,7 +35,7 @@ export default function Poll() {
       ) : pollData ? (
         <ViewPoll data={pollData} pollId={id} />
       ) : (
-        <p>Loading...</p>
+        <p>Laster inn...</p>
       )}
     </div>
   );
