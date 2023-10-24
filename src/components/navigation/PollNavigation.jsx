@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { MoonIcon, SunIcon, LaptopIcon } from "@radix-ui/react-icons";
+import { MoonIcon, SunIcon, LaptopIcon, PlusIcon } from "@radix-ui/react-icons";
 import { useTheme } from 'next-themes';
 import { 
   DropdownMenu, 
@@ -10,6 +10,20 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
 
 export default function PollNavigation() {
   const { setTheme } = useTheme();
@@ -26,9 +40,22 @@ export default function PollNavigation() {
 
           <div className="flex items-center space-x-4">
 
-          <Link className="hover:underline" href={"/poll/new"}>
-            Lag poll
-          </Link>
+          <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Link
+          href={"/poll/new"}
+          className={buttonVariants({ variant: "outline", size: "icon" })}
+        >
+          <PlusIcon className="h-4 w-4" />
+        </Link>
+
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Legg til poll</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -52,6 +79,11 @@ export default function PollNavigation() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+
+            <Avatar>
+    
+      <AvatarFallback>MA</AvatarFallback>
+    </Avatar>
 
             <Button>Logg ut</Button>
           </div>
