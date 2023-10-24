@@ -1,5 +1,5 @@
 # Mål
-Skisse/Wireframe av prosjektet er på denne linken: https://wireframe.cc/esSfmV
+Skisse/Wireframe av prosjektet ligger på denne linken: https://wireframe.cc/esSfmV
 
 Dette prosjektet har som mål å implementere følgende funksjoner:
 
