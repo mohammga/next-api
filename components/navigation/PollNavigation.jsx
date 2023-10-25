@@ -23,7 +23,6 @@ import {
 import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
 
-
 export default function PollNavigation() {
   const { setTheme } = useTheme();
   const router = useRouter();
@@ -40,11 +39,11 @@ export default function PollNavigation() {
 
   const handleSignIn = () => {
     router.push("/");
-  }
+  };
 
   const handleSignUp = () => {
     router.push("/signup");
-  }
+  };
 
   const handleSignOut = async () => {
     await signOut();
@@ -72,31 +71,41 @@ export default function PollNavigation() {
               </span>
             )}
 
-            <Link href="/" className="items-center space-x-2 flex">
-              <span className="text-xl font-bold inline-block">Pollify</span>
-            </Link>
+            {!isPollRoute && (
+              <Link href="/" className="items-center space-x-2 flex">
+                <span className="text-xl font-bold inline-block">Pollify</span>
+              </Link>
+            )}
 
             {isPollRoute && (
-              <nav className="hidden gap-6 md:flex">
-                <Link
-                  className="hover:underline rounded-md text-sm font-medium transition-colors"
-                  href={"#pollify-community"}
-                >
-                  Pollify Sammfunet
+              <>
+                <Link href="/poll" className="items-center space-x-2 flex">
+                  <span className="text-xl font-bold inline-block">
+                    Pollify
+                  </span>
                 </Link>
-                <Link
-                  className="hover:underline rounded-md text-sm font-medium transition-colors"
-                  href={"#my-polls"}
-                >
-                  Mine poll
-                </Link>
-                <Link
-                  className="hover:underline rounded-md text-sm font-medium transition-colors"
-                  href={"#conducted-polls"}
-                >
-                  Gjennomførte poll
-                </Link>
-              </nav>
+
+                <nav className="hidden gap-6 md:flex">
+                  <Link
+                    className="hover:underline rounded-md text-sm font-medium transition-colors"
+                    href={"#pollify-community"}
+                  >
+                    Pollify Sammfunet
+                  </Link>
+                  <Link
+                    className="hover:underline rounded-md text-sm font-medium transition-colors"
+                    href={"#my-polls"}
+                  >
+                    Mine poll
+                  </Link>
+                  <Link
+                    className="hover:underline rounded-md text-sm font-medium transition-colors"
+                    href={"#conducted-polls"}
+                  >
+                    Gjennomførte poll
+                  </Link>
+                </nav>
+              </>
             )}
           </div>
           <div className="flex items-center space-x-4">
