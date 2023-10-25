@@ -1,21 +1,52 @@
 import { prisma } from '@/lib/prisma';
 
-export const findMany = async () => {
+export const findMany = async ({id}) => {
   try {
     const polls = await prisma.poll.findMany({
-        select: {
-            id: true,
-            title: true,
-            description: true,
-            createdAt: true,
+      where: {
+        authorId: {
+          not: id,
         },
-    })
-    return { success: true, data: polls }
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        createdAt: true,
+      },
+    });
+    console.log({id});
+    return { success: true, data: polls };
   } catch (error) {
     console.log(error);
-    return { success: false, error: 'Failed finding polls' };
+    return { success: false, error: "Failed finding polls" };
   }
-}
+};
+
+
+
+
+
+export const findUserPolls = async (identifier) => {
+  try {
+    const polls = await prisma.poll.findMany({
+      where: {
+        ...identifier,
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        createdAt: true,
+        authorId: true,
+      },
+    });
+    return { success: true, data: polls };
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: "Failed finding user polls" };
+  }
+};
 
 
 export const create = async ({ title, description, questions, userId }) => {

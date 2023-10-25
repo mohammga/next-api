@@ -1,13 +1,14 @@
 import * as pollsService from "./polls.service";
 
-export const listPolls = async (req) => {
-  const polls = await pollsService.list();
+export const listPolls = async (req, { id }) => {
+  const polls = await pollsService.list({ id });
 
   if (polls.error)
     return new Response(JSON.stringify(polls.error), { status: 500 });
 
   return new Response(JSON.stringify(polls));
 };
+
 
 
 export const listPoll = async (req, { params }) => {
@@ -20,6 +21,17 @@ export const listPoll = async (req, { params }) => {
 
   return new Response(JSON.stringify(polls));
 };
+
+export const listPollsByUser = async (req, { params }) => {
+    const authorId = params.authorId;
+
+    const polls = await pollsService.getByAuthorId({ authorId });
+
+    if (polls.error)
+      return new Response(JSON.stringify(polls.error), { status: 500 });
+
+    return new Response(JSON.stringify(polls));
+}
 
 
 export const createPoll = async (req) => {

@@ -1,8 +1,10 @@
 import * as pollsRepo from "./polls.repository";
 import * as usersRepo from "../users/users.repository";
 
-export const list = async () => {
-  const polls = await pollsRepo.findMany();
+export const list = async ({ id }) => {
+  const polls = await pollsRepo.findMany({ id });
+
+    console.log(id);
 
   if (!polls.success) return { success: false, error: polls.error };
 
@@ -11,10 +13,6 @@ export const list = async () => {
 
 export const getByUrl = async ({ id }) => {
   const poll = await pollsRepo.findUnique({ id })
-
-  console.log(id)
-
-  console.log(poll)
 
   if (!poll.success) return { success: false, error: poll.error }
   if (!poll.data)
@@ -26,6 +24,20 @@ export const getByUrl = async ({ id }) => {
 
   return { success: true, data: poll.data }
 }
+
+export const getByAuthorId = async ({ authorId }) => {
+  const poll = await pollsRepo.findUserPolls({ authorId });
+
+  if (!poll.success) return { success: false, error: poll.error };
+  if (!poll.data)
+    return {
+      success: false,
+      type: "Poll.NotExist",
+      error: `Poll with authorId ${authorId} does not exist`,
+    };
+
+  return { success: true, data: poll.data };
+};
 
 export const create = async ({ title, description, questions, email }) => {
   // sjekker om bruker finnes for å sikre at vi
