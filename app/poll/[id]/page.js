@@ -4,13 +4,15 @@ import { useState, useEffect } from "react";
 import Poll from "@/components/poll/Poll";
 import Result from "@/components/poll/Result";
 import { useRouter, useParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function Page() {
   const [isFinished, setIsFinished] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
   const [pollData, setPollData] = useState(null);
   const [hasError, setHasError] = useState(false);
-  
+  const { data: session } = useSession();
+
   const router = useRouter();
   const params = useParams();
   const { id } = params;
@@ -28,17 +30,17 @@ export default function Page() {
 
   useEffect(() => {
     fetch(`/api/polls/${id}`)
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Poll not found');
+          throw new Error("Poll not found");
         }
         return response.json();
       })
-      .then(poll => {
+      .then((poll) => {
         setPollData(poll.data);
       })
-      .catch(error => {
-        console.error('Failed to fetch poll data:', error);
+      .catch((error) => {
+        console.error("Failed to fetch poll data:", error);
         setHasError(true);
       });
   }, []);
@@ -48,7 +50,9 @@ export default function Page() {
       {hasError ? (
         <p>Pollen du prøver å få tilgang til eksisterer ikke.</p>
       ) : pollData ? (
-        !isFinished ? (
+        session?.user?.id === pollData.authorId ? (
+          <p>Du kan ikke ta denne pollen, fordi du er forfatteren.</p>
+        ) : !isFinished ? (
           <Poll data={pollData} onFinish={handleFinish} />
         ) : (
           <Result

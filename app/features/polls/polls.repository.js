@@ -77,6 +77,7 @@ export const findUnique = async (identifier) => {
         id: true,
         title: true,
         description: true,
+        authorId: true,
         questions: {
             select: {
                 title: true,

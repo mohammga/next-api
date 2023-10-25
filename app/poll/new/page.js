@@ -13,7 +13,7 @@ export default function CreatePoll() {
   const [currentStep, setCurrentStep] = useState(1);
   const [showResult, setShowResult] = useState(false);
   const [pollURL, setPollURL] = useState('');
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const handelDelete = (type, questionIndex, optionIndex) => {
     if (type === 'question') {
