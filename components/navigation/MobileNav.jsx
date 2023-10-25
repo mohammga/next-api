@@ -13,7 +13,14 @@ export function MobileNav({ children, closeMenu }) {
           <Link
             onClick={closeMenu}
             className="hover:underline"
-            href={"/poll/new"}
+            href={"#pollify-community"}
+          >
+            Pollify Sammfunet
+          </Link>
+          <Link
+            onClick={closeMenu}
+            className="hover:underline"
+            href={"#my-polls"}
           >
             Mine poll
           </Link>
@@ -21,17 +28,9 @@ export function MobileNav({ children, closeMenu }) {
           <Link
             onClick={closeMenu}
             className="hover:underline"
-            href={"/poll/new"}
+            href={"#conducted-polls"}
           >
             Gjennomførte poll
-          </Link>
-
-          <Link
-            onClick={closeMenu}
-            className="hover:underline"
-            href={"/poll/new"}
-          >
-            Pollify Sammfunet
           </Link>
         </nav>
         {children}

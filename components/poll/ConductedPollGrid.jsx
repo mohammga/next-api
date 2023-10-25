@@ -2,7 +2,7 @@ import ConductedCard from "./ConductedCard";
 
 function ConductedPollGird({ data, title }) {
   return (
-    <div>
+    <div id="conducted-polls">
       <h1 className="p-4 text-xl font-semibold">{title}</h1>
       <div className="flex flex-wrap">
         {data.map((poll, index) => (
