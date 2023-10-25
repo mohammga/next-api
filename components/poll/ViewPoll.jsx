@@ -18,7 +18,7 @@ function ViewPoll({ data }) {
   const router = useRouter();
 
   const handleBack = () => {
-    router.push("/");
+    router.push("/poll");
   };
 
   const copyToClipboard = () => {
