@@ -8,17 +8,55 @@ import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { validationSignup } from "@/schemas/index";
-import { cn } from "@/lib/utils";
+import ErrorMessages from "@/components/alerts/ErrorMessages";
+
 
 export default function SignupForm() {
+  const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (values, actions) => {
-    setIsLoading(true);
-    //her skal vi sende data til backend
-    //her skal vi lage brukeren
+    var { name, email, password } = values;
+    const userName = `${name.slice(0, 1).toUpperCase()}${name
+      .slice(1)
+      .toLowerCase()}`;
+
+    const lowercaseEmail = email.toLowerCase();
+    email = lowercaseEmail;
+
+    try {
+      setErrorMessage("");
+      setIsLoading(true);
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        body: JSON.stringify({
+          name: userName,
+          email,
+          password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        setIsLoading(false);
+        router.push("/");
+        actions.resetForm();
+      } else {
+        setErrorMessage((await res.json()).error);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      setErrorMessage(error?.message);
+      setIsLoading(false);
+    }
   };
+
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-40 lg:px-8">
@@ -43,8 +81,9 @@ export default function SignupForm() {
           validationSchema={validationSignup}
           onSubmit={handleSubmit}
         >
-          {({ errors, touched, handleChange, handleBlur, values }) => (
+          {({ errors, handleChange, handleBlur, values }) => (
             <Form className="space-y-6">
+              {errorMessage && <ErrorMessages message={errorMessage} />}
               <div>
                 <Label htmlFor="name">Navn</Label>
                 <div className="mt-2">
@@ -59,9 +98,6 @@ export default function SignupForm() {
                     autoComplete="name"
                     autoCorrect="off"
                     disabled={isLoading}
-                    className={cn(
-                      errors.name && touched.name && 'border-red-500'
-                    )}
                   />
                   {errors.name && (
                     <ErrorMessage
@@ -87,9 +123,6 @@ export default function SignupForm() {
                     autoComplete="email"
                     autoCorrect="off"
                     disabled={isLoading}
-                    className={cn(
-                      errors.email && touched.email && 'border-red-500'
-                    )}
                   />
                   {errors.email && (
                     <ErrorMessage
@@ -114,9 +147,6 @@ export default function SignupForm() {
                     autoComplete="password"
                     autoCorrect="off"
                     disabled={isLoading}
-                    className={cn(
-                      errors.password && touched.password && 'border-red-500'
-                    )}
                   />
                   {errors.password && (
                     <ErrorMessage
