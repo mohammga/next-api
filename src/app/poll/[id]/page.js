@@ -58,7 +58,7 @@ export default function Page() {
           />
         )
       ) : (
-        <p>Loading...</p>
+        <p>Laster inn...</p>
       )}
     </div>
   );

@@ -1,8 +1,5 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-
-import { buttonVariants } from "@/components/ui/button";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,24 +10,10 @@ import {
 } from "@/components/ui/card";
 
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-
-import {
-  Pencil1Icon,
-  TrashIcon,
   OpenInNewWindowIcon,
 } from "@radix-ui/react-icons";
 import { format } from "date-fns";
-import { nb } from "date-fns/locale"; // Import Norwegian locale
+import { nb } from "date-fns/locale";
 function getRandomColor() {
   const colors = [
     "bg-red-500",
@@ -50,11 +33,11 @@ function getRandomColor() {
   return colors[randomIndex];
 }
 
-function Cards({ id, title, description, createdAt }) {
+function PollifyCard({ id, title, description, createdAt }) {
   const router = useRouter();
 
-  const handleView = () => {
-    router.push(`/poll/view/${id}`);
+  const handleOpen = () => {
+    router.push(`/poll/${id}`);
   };
 
   const formattedDate = format(new Date(createdAt), "PPP", { locale: nb });
@@ -77,9 +60,9 @@ function Cards({ id, title, description, createdAt }) {
       <CardDescription>{description}</CardDescription>
     </CardHeader>
     <CardFooter className="items-start flex flex-col space-y-4">
-      <Button variant="secondary" onClick={handleView} className="w-full">
+      <Button variant="secondary" onClick={handleOpen} className="w-full">
         <OpenInNewWindowIcon className="h-4 w-4 mr-2" />
-        Vis Poll
+       Ta poll
       </Button>
     </CardFooter>
   </Card>
@@ -88,4 +71,4 @@ function Cards({ id, title, description, createdAt }) {
   );
 }
 
-export default Cards;
+export default PollifyCard;
