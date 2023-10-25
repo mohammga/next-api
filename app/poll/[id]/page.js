@@ -48,10 +48,10 @@ export default function Page() {
   return (
     <div>
       {hasError ? (
-        <p>Pollen du prøver å få tilgang til eksisterer ikke.</p>
+        <p className="py-4">Pollen du prøver å få tilgang til eksisterer ikke.</p>
       ) : pollData ? (
         session?.user?.id === pollData.authorId ? (
-          <p>Du kan ikke ta denne pollen, fordi du er forfatteren.</p>
+          <p className="py-4">Du kan ikke gjennomføre denne pollen, fordi du er forfatteren.</p>
         ) : !isFinished ? (
           <Poll data={pollData} onFinish={handleFinish} />
         ) : (

@@ -74,3 +74,16 @@ export const validationLogin = Yup.object().shape({
     ),
   password: Yup.string().required("Passord er påkrevd"),
 });
+
+export const validationCreatePoll = Yup.object().shape({
+  title: Yup.string()
+    .required("Tittel er påkrevd")
+    .min(3, "Tittelen må inneholde minst 3 bokstaver")
+    .max(100, "Tittelen kan inneholde maksimalt 100 tegn"), // Adjust the max length as needed
+
+  description: Yup.string()
+    .required("Beskrivelse er påkrevd")
+    .min(3, "Beskrivelsen må inneholde minst 3 bokstaver")
+    .max(500, "Beskrivelsen kan inneholde maksimalt 500 tegn") // Adjust the max length as needed
+    // You can add more specific constraints here, such as disallowing certain characters or words, if needed.
+});

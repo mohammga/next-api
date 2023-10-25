@@ -28,11 +28,12 @@ export default function LoginForm() {
 
     signIn("credentials", { ...normalizedValues, redirect: false }).then(
       async ({ ok, error }) => {
-        setIsLoading(false);
         if (ok && !error) {
+          setIsLoading(false);
           router.push("/poll");
           actions.resetForm();
         } else {
+          setIsLoading(false);
           setErrorMessage(error);
         }
       }

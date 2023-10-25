@@ -7,6 +7,8 @@ import MyPollGrid from "@/components/poll/MyPollGrid";
 
 function PollDashboard() {
   const [myPolls, setMyPolls] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Added loading state
+
   useEffect(() => {
     fetch("/api/polls")
       .then((res) => {
@@ -15,14 +17,22 @@ function PollDashboard() {
         }
         return res.json();
       })
-      .then((polls) => setMyPolls(polls.data))
-      .catch((error) =>
+      .then((polls) => {
+        setMyPolls(polls.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
         console.error(
           "There was a problem with the fetch operation:",
           error.message
-        )
-      );
+        );
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading) {
+    return <div>Laster inn...</div>;
+  }
 
   return (
     <div>

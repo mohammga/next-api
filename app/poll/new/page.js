@@ -4,6 +4,7 @@ import PollStart from "@/components/poll/PollStart"
 import QuestionForm from '@/components/poll/QuestionForm';
 import PollResult from '@/components/poll/PollResult';
 import { useSession } from 'next-auth/react';
+import Test from '@/components/poll/Test';
 
 
 export default function CreatePoll() {
@@ -111,14 +112,7 @@ export default function CreatePoll() {
       )}
       {currentStep === 2 && !showResult && (
         <div>
-          <QuestionForm pollTitle={pollTitle}
-            handelDelete={handelDelete}
-            handleSavePoll={handleSavePoll}
-            polls={polls}
-            handleOptionChange={handleOptionChange}
-            handleQuestionChange={handleQuestionChange}
-            addOption={addOption}
-            addQuestion={addQuestion} />
+          <Test />
         </div>
       )}
       {showResult && (
