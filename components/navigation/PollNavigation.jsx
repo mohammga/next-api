@@ -36,7 +36,7 @@ export default function PollNavigation() {
   const isHome = pathname === "/";
   const isSignup = pathname === "/signup";
   const isPoll = pathname === "/poll";
-  const isPollRoute = pathname.startsWith("/poll");
+  const isPollRoute = pathname.startsWith("/poll/");
 
   const handleSignIn = () => {
     router.push("/");
@@ -55,7 +55,7 @@ export default function PollNavigation() {
       <header className="container p-0">
         <div className="flex h-16 items-center justify-between py-6">
           <div className="flex gap-6 md:gap-10 items-center">
-            {!isHome && !isSignup && (
+            {!isHome && !isSignup && !isPollRoute && isPoll && (
               <span
                 className="flex text-lg cursor-pointer items-center md:hidden"
                 onClick={toggleMobileMenu}
@@ -160,7 +160,9 @@ export default function PollNavigation() {
             {isPollRoute && <Button onClick={handleSignOut}>Logg ut</Button>}
           </div>
         </div>
-        {showMobileMenu && <MobileNav closeMenu={toggleMobileMenu}></MobileNav>}
+        {!isHome && !isSignup && !isPollRoute && showMobileMenu && (
+          <MobileNav closeMenu={toggleMobileMenu} />
+        )}
       </header>
     </section>
   );
