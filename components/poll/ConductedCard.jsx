@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-("@/components/ui/alert-dialog");
+import { CheckCircle2 } from "lucide-react";
 
 import { format } from "date-fns";
 import { nb } from "date-fns/locale"; // Import Norwegian locale
@@ -54,6 +54,10 @@ function ConductedCard({ id, title, description, createdAt }) {
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
+        <div className="flex gap-2">
+          <CheckCircle2 className="text-green-500" />
+          <p>25.10.23</p>
+        </div>
       </Card>
     </div>
   );
