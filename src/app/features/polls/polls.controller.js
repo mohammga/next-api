@@ -66,8 +66,3 @@ export const createPoll = async (req) => {
     message: "Poll created successfully."
   }), { status: 201 });
 };
-
-
-//PUT
-
-//DELETE
