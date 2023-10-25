@@ -157,7 +157,9 @@ export default function PollNavigation() {
 
             {isHome && <Button onClick={handleSignUp}>Opprett konto</Button>}
             {isSignup && <Button onClick={handleSignIn}>Logg inn</Button>}
-            {isPollRoute && <Button onClick={handleSignOut}>Logg ut</Button>}
+            {(isPoll || isPollRoute) && (
+              <Button onClick={handleSignOut}>Logg ut</Button>
+            )}
           </div>
         </div>
         {!isHome && !isSignup && !isPollRoute && showMobileMenu && (

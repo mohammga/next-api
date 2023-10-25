@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import PollStart from "@/components/poll/PollStart"
 import QuestionForm from '@/components/poll/QuestionForm';
 import PollResult from '@/components/poll/PollResult';
+import { useSession } from 'next-auth/react';
 
 
 export default function CreatePoll() {
@@ -12,6 +13,7 @@ export default function CreatePoll() {
   const [currentStep, setCurrentStep] = useState(1);
   const [showResult, setShowResult] = useState(false);
   const [pollURL, setPollURL] = useState('');
+  const { data: session, status } = useSession();
 
   const handelDelete = (type, questionIndex, optionIndex) => {
     if (type === 'question') {
@@ -56,7 +58,7 @@ export default function CreatePoll() {
     // 1. Structure your poll data.
     const pollData = {
       title: pollTitle,
-      email: 'bob.smith@example.com',
+      email: session?.user?.email,
       description: pollDescription,
       questions: polls.map(poll => ({
         title: poll.title,
