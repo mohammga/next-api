@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import { MoonIcon, SunIcon, LaptopIcon, PlusIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import {
@@ -13,90 +14,112 @@ import {
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import { MobileNav } from "@/components/navigation/MobileNav";
-
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-
 import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { signOut } from "next-auth/react";
+
 
 export default function PollNavigation() {
   const { setTheme } = useTheme();
-    const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-    const toggleMobileMenu = () => {
-      setShowMobileMenu(!showMobileMenu);
-    };
+  const toggleMobileMenu = () => {
+    setShowMobileMenu(!showMobileMenu);
+  };
+
+  const isHome = pathname === "/";
+  const isSignup = pathname === "/signup";
+  const isPollRoute = pathname.startsWith("/poll");
+
+  const handleSignIn = () => {
+    router.push("/");
+  }
+
+  const handleSignUp = () => {
+    router.push("/signup");
+  }
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <section className="w-full sm:px-4 md:px-6 lg:px-8 border-b border-border">
       <header className="container p-0">
         <div className="flex h-16 items-center justify-between py-6">
           <div className="flex gap-6 md:gap-10 items-center">
-            <span
-              className="flex text-lg cursor-pointer items-center md:hidden"
-              onClick={() => setShowMobileMenu(!showMobileMenu)}
-            >
-              {showMobileMenu ? (
-                <span className="h-9 w-9">
-                  <XMarkIcon />
-                </span>
-              ) : (
-                <span className="h-9 w-9">
-                  <Bars2Icon />
-                </span>
-              )}
-            </span>
+            {!isHome && !isSignup && (
+              <span
+                className="flex text-lg cursor-pointer items-center md:hidden"
+                onClick={toggleMobileMenu}
+              >
+                {showMobileMenu ? (
+                  <span className="h-9 w-9">
+                    <XMarkIcon />
+                  </span>
+                ) : (
+                  <span className="h-9 w-9">
+                    <Bars2Icon />
+                  </span>
+                )}
+              </span>
+            )}
 
             <Link href="/" className="items-center space-x-2 flex">
               <span className="text-xl font-bold inline-block">Pollify</span>
             </Link>
 
-            <nav className="hidden gap-6 md:flex">
-              <Link
-                className="hover:underline  rounded-md text-sm font-medium transition-colors"
-                href={"#pollify-community"}
-              >
-                Pollify Sammfunet
-              </Link>
-              <Link
-                className="hover:underline  rounded-md text-sm font-medium transition-colors"
-                href={"#my-polls"}
-              >
-                Mine poll
-              </Link>
-              <Link
-                className="hover:underline  rounded-md text-sm font-medium transition-colors"
-                href={"#conducted-polls"}
-              >
-                Gjennomførte poll
-              </Link>
-            </nav>
+            {isPollRoute && (
+              <nav className="hidden gap-6 md:flex">
+                <Link
+                  className="hover:underline rounded-md text-sm font-medium transition-colors"
+                  href={"#pollify-community"}
+                >
+                  Pollify Sammfunet
+                </Link>
+                <Link
+                  className="hover:underline rounded-md text-sm font-medium transition-colors"
+                  href={"#my-polls"}
+                >
+                  Mine poll
+                </Link>
+                <Link
+                  className="hover:underline rounded-md text-sm font-medium transition-colors"
+                  href={"#conducted-polls"}
+                >
+                  Gjennomførte poll
+                </Link>
+              </nav>
+            )}
           </div>
-
           <div className="flex items-center space-x-4">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Link
-                    href={"/poll/new"}
-                    className={buttonVariants({
-                      variant: "outline",
-                      size: "icon",
-                    })}
-                  >
-                    <PlusIcon className="h-[1.2rem] w-[1.2rem]" />
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Legg til poll</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-
+            {!isHome && !isSignup && (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link
+                      href={"/poll/new"}
+                      className={buttonVariants({
+                        variant: "outline",
+                        size: "icon",
+                      })}
+                    >
+                      <PlusIcon className="h-[1.2rem] w-[1.2rem]" />
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Legg til poll</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -120,7 +143,9 @@ export default function PollNavigation() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button>Logg inn</Button>
+            {isHome && <Button onClick={handleSignUp}>Opprett konto</Button>}
+            {isSignup && <Button onClick={handleSignIn}>Logg inn</Button>}
+            {isPollRoute && <Button onClick={handleSignOut}>Logg ut</Button>}
           </div>
         </div>
         {showMobileMenu && <MobileNav closeMenu={toggleMobileMenu}></MobileNav>}
