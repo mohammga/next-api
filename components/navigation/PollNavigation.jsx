@@ -79,13 +79,11 @@ export default function PollNavigation() {
             )}
 
             {(isPoll || isPollRoute) &&  (
-              <>
                 <Link href="/poll" className="items-center space-x-2 flex">
                   <span className="text-xl font-bold inline-block">
                     Pollify
                   </span>
                 </Link>
-              </>
             )}
 
             {isPoll && (
