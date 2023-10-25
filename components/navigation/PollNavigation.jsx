@@ -35,6 +35,7 @@ export default function PollNavigation() {
 
   const isHome = pathname === "/";
   const isSignup = pathname === "/signup";
+  const isPoll = pathname === "/poll";
   const isPollRoute = pathname.startsWith("/poll");
 
   const handleSignIn = () => {
@@ -84,28 +85,30 @@ export default function PollNavigation() {
                     Pollify
                   </span>
                 </Link>
-
-                <nav className="hidden gap-6 md:flex">
-                  <Link
-                    className="hover:underline rounded-md text-sm font-medium transition-colors"
-                    href={"#pollify-community"}
-                  >
-                    Pollify Sammfunet
-                  </Link>
-                  <Link
-                    className="hover:underline rounded-md text-sm font-medium transition-colors"
-                    href={"#my-polls"}
-                  >
-                    Mine poll
-                  </Link>
-                  <Link
-                    className="hover:underline rounded-md text-sm font-medium transition-colors"
-                    href={"#conducted-polls"}
-                  >
-                    Gjennomførte poll
-                  </Link>
-                </nav>
               </>
+            )}
+
+            {isPoll && (
+              <nav className="hidden gap-6 md:flex">
+                <Link
+                  className="hover:underline rounded-md text-sm font-medium transition-colors"
+                  href={"#pollify-community"}
+                >
+                  Pollify Sammfunet
+                </Link>
+                <Link
+                  className="hover:underline rounded-md text-sm font-medium transition-colors"
+                  href={"#my-polls"}
+                >
+                  Mine poll
+                </Link>
+                <Link
+                  className="hover:underline rounded-md text-sm font-medium transition-colors"
+                  href={"#conducted-polls"}
+                >
+                  Gjennomførte poll
+                </Link>
+              </nav>
             )}
           </div>
           <div className="flex items-center space-x-4">
