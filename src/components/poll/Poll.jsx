@@ -74,8 +74,8 @@ function Poll({ data, onFinish }) {
 
 return (
     <form>
-      <div className="w-full my-2 rounded-lg">
-        <h1 className="text-2xl font-bold mb-4">{data.title}</h1>
+      <div className="w-full my-4 rounded-lg">
+        <h1 className="text-2xl font-bold mb-2">{data.title}</h1>
         <p className="text-muted-foreground mb-4">{data.description}</p>
         {data.questions.map((question, index) => (
           <div key={index} className="p-4 border border-border rounded-md mb-4">
@@ -89,7 +89,7 @@ return (
                 <div key={optionIndex} className="flex space-x-3">
                   <input
                     type="radio"
-                    name={`quiz-answer-${index}`} // Updated name to be unique per question
+                    name={`option-${index}`}
                     value={option.id}
                     checked={selected[index] === optionIndex}
                     onChange={() => handleChoice(optionIndex)}

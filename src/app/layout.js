@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="no">
+    <html lang="no" >
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         >
           <main>
             <PollNavigation />
-            <div className="sm:px-4 md:px-6 lg:px-8">{children}</div>
+            <div className="px-4 md:px-6 lg:px-8">{children}</div>
           </main>
         </ThemeProvider>
       </body>
