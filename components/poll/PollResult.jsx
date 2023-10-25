@@ -22,7 +22,7 @@ export default function PollResult({ pollURL }) {
   };
 
     const handleBack = () => {
-    router.push("/");
+    router.push("/poll");
   };
 
     const copyToClipboard = () => {
