@@ -55,7 +55,7 @@ export default function PollNavigation() {
       <header className="container p-0">
         <div className="flex h-16 items-center justify-between py-6">
           <div className="flex gap-6 md:gap-10 items-center">
-            {!isHome && !isSignup && !isPollRoute && isPoll && (
+            {!isHome && !isSignup && (
               <span
                 className="flex text-lg cursor-pointer items-center md:hidden"
                 onClick={toggleMobileMenu}
@@ -72,39 +72,37 @@ export default function PollNavigation() {
               </span>
             )}
 
-              {(isHome || isSignup ) &&  ( 
+            {(isHome || isSignup) && (
               <Link href="/" className="items-center space-x-2 flex">
                 <span className="text-xl font-bold inline-block">Pollify</span>
               </Link>
             )}
 
-            {(isPoll || isPollRoute) &&  (
-                <Link href="/poll" className="items-center space-x-2 flex">
-                  <span className="text-xl font-bold inline-block">
-                    Pollify
-                  </span>
-                </Link>
+            {(isPoll || isPollRoute) && (
+              <Link href="/poll" className="items-center space-x-2 flex">
+                <span className="text-xl font-bold inline-block">Pollify</span>
+              </Link>
             )}
 
-            {isPoll && (
+            {(isPoll || isPollRoute) && (
               <nav className="hidden gap-6 md:flex">
                 <Link
                   className="hover:underline rounded-md text-sm font-medium transition-colors"
-                  href={"#pollify-community"}
+                  href={"/poll"}
                 >
-                  Pollify Sammfunet
+                  Pollify Community
                 </Link>
                 <Link
                   className="hover:underline rounded-md text-sm font-medium transition-colors"
-                  href={"#my-polls"}
+                  href={"/poll/my-poll"}
                 >
-                  Mine poll
+                  Mine Poll
                 </Link>
                 <Link
                   className="hover:underline rounded-md text-sm font-medium transition-colors"
-                  href={"#conducted-polls"}
+                  href={"/poll/conducted-poll"}
                 >
-                  Gjennomførte poll
+                  Gjennomførte Poll
                 </Link>
               </nav>
             )}
@@ -160,7 +158,7 @@ export default function PollNavigation() {
             )}
           </div>
         </div>
-        {!isHome && !isSignup && !isPollRoute && showMobileMenu && (
+        {!isHome && !isSignup && showMobileMenu && (
           <MobileNav closeMenu={toggleMobileMenu} />
         )}
       </header>

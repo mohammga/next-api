@@ -10,17 +10,13 @@ export function MobileNav({ children, closeMenu }) {
     <div className="fixed inset-0 top-14 z-50 h-full overflow-auto md:hidden transform transition-transform duration-300 ease-in-out bg-background shadow-sm">
       <div className="relative z-20 h-full p-4 text-popover-foreground">
         <nav className="flex flex-col space-y-3">
-          <Link
-            onClick={closeMenu}
-            className="hover:underline"
-            href={"#pollify-community"}
-          >
-            Pollify Sammfunet
+          <Link onClick={closeMenu} className="hover:underline" href={"/poll"}>
+            Pollify Community
           </Link>
           <Link
             onClick={closeMenu}
             className="hover:underline"
-            href={"#my-polls"}
+            href={"/poll/my-poll"}
           >
             Mine poll
           </Link>
@@ -28,7 +24,7 @@ export function MobileNav({ children, closeMenu }) {
           <Link
             onClick={closeMenu}
             className="hover:underline"
-            href={"#conducted-polls"}
+            href={"/poll/conducted-poll"}
           >
             Gjennomførte poll
           </Link>

@@ -1,35 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import PollifyCardGrid from "@/components/poll/PollifyCardGrid";
 import ConductedPollGrid from "@/components/poll/ConductedPollGrid";
 import { useSession } from "next-auth/react";
+import { Button } from "@/components/ui/Button";
+import { useRouter } from "next/navigation";
 
-function PollDashboard() {
-  const [pollifyPolls, setPollifyPolls] = useState([]);
+function ConductedPollPage() {
+  const [conductedPolls, setConductedPolls] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
   const { data: session } = useSession();
-
-  useEffect(() => {
-    fetch("/api/polls")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then((polls) => {
-        setPollifyPolls(polls.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(
-          "There was a problem with the fetch operation:",
-          error.message
-        );
-        setIsLoading(false);
-      });
-  }, []);
 
   useEffect(() => {
     fetch(`/api/users/${session?.user?.id}`)
@@ -52,19 +33,27 @@ function PollDashboard() {
       });
   }, [session]);
 
+  const handleStart = () => {
+    router.push("/poll");
+  };
+
   if (isLoading) {
     return <div>Laster inn...</div>;
   }
 
   return (
     <div>
-      {pollifyPolls.length > 0 ? (
-        <PollifyCardGrid data={pollifyPolls} title={"Pollify Community"} />
+      {conductedPolls.length > 0 ? (
+        <ConductedPollGrid data={conductedPolls} title={"Gjennomførte Poll"} />
       ) : (
-        <div className="py-4">Det finnes ingen poll i Pollify Community.</div>
+        <div className="py-4">
+          <h2 className="pb-4 text-xl font-semibold">Gjennomførte Poll</h2>
+          <p>Du har ingen gjennomførte poll.</p>
+          <Button onClick={handleStart}>Ta en poll</Button>
+        </div>
       )}
     </div>
   );
 }
 
-export default PollDashboard;
+export default ConductedPollPage;
