@@ -40,8 +40,7 @@ export const getByAuthorId = async ({ authorId }) => {
 };
 
 export const create = async ({ title, description, questions, email }) => {
-  // sjekker om bruker finnes for å sikre at vi
-  // kan lage en releasjon mellom user og poll
+
   const user = await usersRepo.exist({ email })
 
   if (!user.success) {
