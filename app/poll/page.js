@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import PollifyCardGrid from "@/components/poll/PollifyCardGrid";
-import ConductedPollGrid from "@/components/poll/ConductedPollGrid";
 import { useSession } from "next-auth/react";
+import { Button } from "@/components/ui/Button";
+import { useRouter } from "next/navigation";
 
 function PollDashboard() {
   const [pollifyPolls, setPollifyPolls] = useState([]);
@@ -52,6 +53,10 @@ function PollDashboard() {
       });
   }, [session]);
 
+    const handleCreate = () => {
+      router.push("/poll/new");
+    };
+
   if (isLoading) {
     return <div>Laster inn...</div>;
   }
@@ -61,7 +66,15 @@ function PollDashboard() {
       {pollifyPolls.length > 0 ? (
         <PollifyCardGrid data={pollifyPolls} title={"Pollify Community"} />
       ) : (
-        <div className="py-4">Det finnes ingen poll i Pollify Community.</div>
+        <div className="py-4">
+          <h2 className="pb-2 text-xl font-semibold">Pollify Community</h2>
+          <p className="pb-2">
+            Det ser ut til at det ikke finnes noen poll i Pollify Community
+            ennå.
+          </p>
+
+          <Button onClick={handleCreate}>Opprett en poll</Button>
+        </div>
       )}
     </div>
   );

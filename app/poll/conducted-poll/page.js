@@ -47,8 +47,11 @@ function ConductedPollPage() {
         <ConductedPollGrid data={conductedPolls} title={"Gjennomførte Poll"} />
       ) : (
         <div className="py-4">
-          <h2 className="pb-4 text-xl font-semibold">Gjennomførte Poll</h2>
-          <p>Du har ingen gjennomførte poll.</p>
+          <h2 className="pb-2 text-xl font-semibold">Gjennomførte Poll</h2>
+          <p className="pb-2">
+            Du har ikke gjennomført noen poll ennå. Hva med å ta en nå?
+          </p>
+
           <Button onClick={handleStart}>Ta en poll</Button>
         </div>
       )}

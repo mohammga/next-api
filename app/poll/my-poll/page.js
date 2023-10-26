@@ -47,8 +47,8 @@ function MyPollPage() {
         <MyPollGrid data={myPolls} title={"Mine Poll"} />
       ) : (
         <div className="py-4">
-          <h2 className="pb-4 text-xl font-semibold">Mine Poll</h2>
-          <p>Du har ikke laget noen poll ennå.</p>
+          <h2 className="pb-2 text-xl font-semibold">Mine Poll</h2>
+          <p className="pb-2">Du har ikke opprettet noen poll ennå. Klar for å opprette din første?</p>
           <Button onClick={handleCreate}>Opprett en poll</Button>
         </div>
       )}
