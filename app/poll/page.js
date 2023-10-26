@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import PollifyCardGrid from "@/components/poll/PollifyCardGrid";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 function PollDashboard() {
