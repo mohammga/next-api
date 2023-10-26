@@ -13,8 +13,6 @@ import {
 ("@/components/ui/alert-dialog");
 
 import {
-  Pencil1Icon,
-  TrashIcon,
   OpenInNewWindowIcon,
 } from "@radix-ui/react-icons";
 import { format } from "date-fns";
@@ -68,8 +66,8 @@ function MyPollCard({ id, title, description, createdAt }) {
         <CardFooter className="items-start flex flex-col space-y-4">
           <Button variant="secondary" onClick={handleView} className="w-full">
             <OpenInNewWindowIcon className="h-4 w-4 mr-2" />
-            Se Poll
-          </Button>
+              Se Poll
+            </Button>
         </CardFooter>
       </Card>
     </div>
