@@ -7,6 +7,7 @@ import { useRouter, useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function Page() {
+  const [hasTakenPoll, setHasTakenPoll] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
   const [pollData, setPollData] = useState(null);
@@ -28,6 +29,9 @@ export default function Page() {
     router.push("/poll");
   };
 
+
+  //sjekke om brukeren har tatt pollen fra før og kan ikke ta den igjen
+
   useEffect(() => {
     fetch(`/api/polls/${id}`)
       .then((response) => {
@@ -38,6 +42,7 @@ export default function Page() {
       })
       .then((poll) => {
         setPollData(poll.data);
+        setHasTakenPoll(poll.hasTaken);
       })
       .catch((error) => {
         console.error("Failed to fetch poll data:", error);
@@ -45,25 +50,29 @@ export default function Page() {
       });
   }, []);
 
-  return (
-    <div>
-      {hasError ? (
-        <p className="py-4">Pollen du prøver å få tilgang til eksisterer ikke.</p>
-      ) : pollData ? (
-        session?.user?.id === pollData.authorId ? (
-          <p className="py-4">Du kan ikke gjennomføre denne pollen, fordi du er forfatteren.</p>
-        ) : !isFinished ? (
-          <Poll data={pollData} onFinish={handleFinish} />
-        ) : (
-          <Result
-            questions={pollData}
-            answers={userAnswers}
-            onRestart={handleRestart}
-          />
-        )
+return (
+  <div>
+    {hasError ? (
+      <p className="py-4">Pollen du prøver å få tilgang til eksisterer ikke.</p>
+    ) : hasTakenPoll ? (
+      <p className="py-4">Du kan ikke ta denne pollen igjen.</p>
+    ) : pollData ? (
+      session?.user?.id === pollData.authorId ? (
+        <p className="py-4">
+          Du kan ikke gjennomføre denne pollen, fordi du er forfatteren.
+        </p>
+      ) : !isFinished ? (
+        <Poll data={pollData} onFinish={handleFinish} />
       ) : (
-        <p>Laster inn...</p>
-      )}
-    </div>
-  );
+        <Result
+          questions={pollData}
+          answers={userAnswers}
+          onRestart={handleRestart}
+        />
+      )
+    ) : (
+      <p>Laster inn...</p>
+    )}
+  </div>
+);
 }
