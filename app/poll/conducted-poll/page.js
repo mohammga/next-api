@@ -21,7 +21,7 @@ function ConductedPollPage() {
         return res.json();
       })
       .then((polls) => {
-        setMyPolls(polls.data);
+        setConductedPolls(polls.data);
         setIsLoading(false);
       })
       .catch((error) => {
