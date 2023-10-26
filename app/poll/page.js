@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from "react";
 import PollifyCardGrid from "@/components/poll/PollifyCardGrid";
-import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
 
 function PollDashboard() {
   const [pollifyPolls, setPollifyPolls] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     fetch("/api/polls")
@@ -32,30 +31,9 @@ function PollDashboard() {
       });
   }, []);
 
-  useEffect(() => {
-    fetch(`/api/users/${session?.user?.id}`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return res.json();
-      })
-      .then((polls) => {
-        setMyPolls(polls.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(
-          "There was a problem with the fetch operation:",
-          error.message
-        );
-        setIsLoading(false);
-      });
-  }, [session]);
-
-    const handleCreate = () => {
-      router.push("/poll/new");
-    };
+  const handleCreate = () => {
+    router.push("/poll/new");
+  };
 
   if (isLoading) {
     return <div>Laster inn...</div>;

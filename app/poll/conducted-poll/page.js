@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import ConductedPollGrid from "@/components/poll/ConductedPollGrid";
 import { useSession } from "next-auth/react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 function ConductedPollPage() {

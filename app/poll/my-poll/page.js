@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import MyPollGrid from "@/components/poll/MyPollGrid";
 import { useSession } from "next-auth/react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 function MyPollPage() {
@@ -35,6 +35,7 @@ function MyPollPage() {
 
   const handleCreate = () => {
     router.push("/poll/new");
+
   }
 
   if (isLoading) {
