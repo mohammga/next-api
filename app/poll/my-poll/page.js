@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import MyPollGrid from "@/components/poll/MyPollGrid";
+import MyPollGrid from "@/components/grid/MyPollGrid";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";

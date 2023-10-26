@@ -3,6 +3,9 @@
 import { Button } from "@/components/ui/button"
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+
 
 function Poll({ data, onFinish }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -11,16 +14,12 @@ function Poll({ data, onFinish }) {
 
   const router = useRouter();
 
-const handleChoice = (optionIndex, index) => {
-    var nowIndex = currentIndex
-    if (index != currentIndex) {
-      setCurrentIndex(index) //update Index
-      nowIndex = index //currentindex wont update immediatley, use new variable instead
-    }
+  const handleChoice = (optionIndex, index) => {
     const newSelected = [...selected];
-    newSelected[nowIndex] = optionIndex;
+    newSelected[index] = parseInt(optionIndex);
     setSelected(newSelected);
-  };
+};
+
 
   const handleSubmit = async () => {
     // Assuming you have a user ID. 
@@ -74,33 +73,29 @@ return (
       <h1 className="text-2xl font-bold mb-2">{data.title}</h1>
       <p className="text-muted-foreground mb-4">{data.description}</p>
       {data.questions.map((question, index) => (
-        <div key={index} className="p-4 border border-border rounded-md mb-4">
-          <h2 className="text-lg font-semibold mb-2">
+    <div key={index} className="p-4 border border-border rounded-md mb-4">
+        <h2 className="text-lg font-semibold mb-2">
             Spørsmål {index + 1}: {question.title}
-          </h2>
+        </h2>
 
-          <div>
-            <label className="text-gray-700 mb-8">
-              Velg et alternativ nedenfor:
-            </label>
-            {question.options.map((option, optionIndex) => (
-              <div key={optionIndex} className="flex space-x-3">
-                <input
-                  type="radio"
-                  name={`option-${index}`}
-                  id={"optionindex:" + optionIndex}
-                  value={option.id}
-                  checked={selected[index] === optionIndex}
-                  onChange={() => handleChoice(optionIndex, index)}
-                  required
-                  className="text-blue-500 h-4 w-4"
-                />
-                <p className="text-gray-700">{option.title}</p>
-              </div>
-            ))}
-          </div>
+        <div>
+            <label className="mb-8">Velg et alternativ nedenfor:</label>
+            <RadioGroup
+                value={selected[index]}
+                onValueChange={value => handleChoice(value, index)}
+            >
+                {question.options.map((option, optionIndex) => (
+                    <div key={option.id} className="flex items-center space-x-2">
+                        <RadioGroupItem value={optionIndex.toString()}>
+                        </RadioGroupItem>
+                        <Label>{option.title}</Label>
+                    </div>
+                ))}
+            </RadioGroup>
         </div>
-      ))}
+    </div>
+))}
+
       <div className="flex gap-4 mt-4">
         <Button type="button" variant="outline" onClick={handleBack}>
           Tilbake

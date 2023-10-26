@@ -1,4 +1,4 @@
-import PollifyCard from "@/components/poll/PollifyCard";
+import PollifyCard from "@/components/card/PollifyCard";
 import { render, screen } from "@testing-library/react";
 
 const mockPush = jest.fn();

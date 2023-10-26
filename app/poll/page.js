@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import PollifyCardGrid from "@/components/poll/PollifyCardGrid";
+import PollifyCardGrid from "@/components/grid/PollifyCardGrid";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 

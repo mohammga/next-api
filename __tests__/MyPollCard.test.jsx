@@ -1,4 +1,4 @@
-import MyPollCard from "@/components/poll/MyPollCard";
+import MyPollCard from "@/components/card/MyPollCard";
 import { render, screen } from "@testing-library/react";
 
 const mockPush = jest.fn();
