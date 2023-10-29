@@ -14,7 +14,7 @@ export default function PollStart({ setPollTitle, setPollDescription, nextStep }
   };
 
   return (
-    <div className="flex justify-center items-center h-full">
+    <div className="flex justify-center md:items-center h-full">
       <div className="flex w-full md:w-[550px] flex-col">
         <div>
           <h1 className="text-xl font-semibold py-4">Opprett en Poll</h1>
