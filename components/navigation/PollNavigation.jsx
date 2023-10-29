@@ -51,10 +51,10 @@ export default function PollNavigation() {
   };
 
   return (
-    <section className="w-full sm:px-4 md:px-6 lg:px-8 border-b border-border">
+    <section className="w-full px-4 md:px-6 lg:px-8 border-b border-border">
       <header className="container p-0">
         <div className="flex h-16 items-center justify-between py-6">
-          <div className="flex gap-6 md:gap-10 items-center">
+          <div className="flex gap-4 md:gap-10 items-center">
             {!isHome && !isSignup && (
               <span
                 className="flex text-lg cursor-pointer items-center md:hidden"

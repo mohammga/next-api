@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
           >
             <main>
               <PollNavigation />
-              <div className="px-4 md:px-6 lg:px-8">{children}</div>
+              <div className="px-4 md:px-6 lg:px-8 h-screen">{children}</div>
             </main>
           </ThemeProvider>
         </Providers>

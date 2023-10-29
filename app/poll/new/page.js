@@ -101,7 +101,7 @@ export default function CreatePoll() {
   console.log('polls', polls);
   
   return (
-    <div className="p-4">
+    <>
       {currentStep === 1 && (
         <PollStart
           pollTitle={pollTitle}
@@ -111,13 +111,11 @@ export default function CreatePoll() {
           nextStep={nextStep} />
       )}
       {currentStep === 2 && !showResult && (
-        <div>
           <Test />
-        </div>
       )}
       {showResult && (
         <PollResult pollURL={pollURL} />
       )}
-    </div>
+    </>
   );
 }

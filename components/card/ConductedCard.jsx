@@ -1,48 +1,29 @@
 "use client";
 
-import * as React from "react";
-import { useRouter } from "next/navigation";
+import { truncate } from "@/utils/truncate";
+import { getRandomColor } from "@/utils/background-colors";
 import {
   Card,
-  CardDescription,
   CardHeader,
   CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
 } from "@/components/ui/card";
+
 import { CheckCircle2 } from "lucide-react";
-
 import { format } from "date-fns";
-import { nb } from "date-fns/locale"; // Import Norwegian locale
-function getRandomColor() {
-  const colors = [
-    "bg-red-500",
-    "bg-blue-500",
-    "bg-green-500",
-    "bg-yellow-500",
-    "bg-purple-500",
-    "bg-pink-500",
-    "bg-indigo-500",
-    "bg-cyan-500",
-    "bg-teal-500",
-    "bg-lime-500",
-    "bg-amber-500",
-    "bg-gray-500",
-  ];
+import { nb } from "date-fns/locale";
 
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex];
-}
-
-function ConductedCard({ id, title, description, createdAt }) {
-  const router = useRouter();
-
+function ConductedCard({ title, description, createdAt }) {
   const formattedDate = format(new Date(createdAt), "PPP", { locale: nb });
 
   const randomBackgroundColor = getRandomColor();
 
   return (
-    <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4 mb-8">
-      <Card className="flex flex-col gap-4 h-full">
-        <CardHeader>
+    <div className="w-full">
+      <Card className="flex flex-col h-full">
+        <CardHeader className="pb-2">
           <div
             className={`bg-center rounded-xl bg-no-repeat relative min-h-[175px] bg-[url('/images/poll.png')] contrast-50`}
           >
@@ -50,14 +31,22 @@ function ConductedCard({ id, title, description, createdAt }) {
               className={`absolute rounded-xl inset-0 h-full w-full ${randomBackgroundColor} bg-opacity-80`}
             ></div>
           </div>
-          <CardDescription>Publisert: {formattedDate}</CardDescription>
+          <CardDescription className="font-light py-1">
+            Publisert: {formattedDate}
+          </CardDescription>
           <CardTitle>{title}</CardTitle>
-          <CardDescription>{description}</CardDescription>
         </CardHeader>
-        <div className="flex gap-2">
-          <CheckCircle2 className="text-green-500" />
-          <p>25.10.23</p>
-        </div>
+        <CardContent className="flex-grow pt-0 pb-4 m-0">
+          <p className="text-sm text-muted-foreground">
+            {truncate(description)}
+          </p>
+        </CardContent>
+        <CardFooter>
+          <div className="flex gap-2 items-center">
+            <CheckCircle2 className="text-green-500" />
+            <p className="text-sm font-light text-muted-foreground">Gjennomført</p>
+          </div>
+        </CardFooter>
       </Card>
     </div>
   );

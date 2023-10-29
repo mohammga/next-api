@@ -38,7 +38,7 @@ function ConductedPollPage() {
   };
 
   if (isLoading) {
-    return <div>Laster inn...</div>;
+    return <p className="py-4">Laster inn...</p>;
   }
 
   return (
