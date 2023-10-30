@@ -13,7 +13,7 @@ function ConductedPoll() {
   const { data: session } = useSession();
 
   useEffect(() => {
-    fetch(`/api/users/${session?.user?.id}`)
+    fetch(`/api/conducted/${session?.user?.id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -22,6 +22,7 @@ function ConductedPoll() {
       })
       .then((polls) => {
         setConductedPolls(polls.data);
+        console.log(polls);
         setIsLoading(false);
       })
       .catch((error) => {

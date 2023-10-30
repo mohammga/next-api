@@ -23,7 +23,7 @@ export const getByUrl = async ({ id }) => {
   return { success: true, data: poll.data }
 }
 
-export const getByAuthorId = async ({ authorId }) => {
+export const getPollsByAuthorId = async ({ authorId }) => {
   const poll = await pollsRepo.findUserPolls({ authorId });
 
   if (!poll.success) return { success: false, error: poll.error };
@@ -36,6 +36,20 @@ export const getByAuthorId = async ({ authorId }) => {
 
   return { success: true, data: poll.data };
 };
+
+export const getConductedPollsByUserId = async ({ userId }) => {
+  const poll = await pollsRepo.findConductedPolls({ userId });
+
+  if (!poll.success) return { success: false, error: poll.error };
+  if (!poll.data)
+    return {
+      success: false,
+      type: "Poll.NotExist",
+      error: `Poll with userId ${userId} does not exist`,
+    };
+
+  return { success: true, data: poll.data };
+}
 
 export const create = async ({ title, description, questions, email }) => {
 
