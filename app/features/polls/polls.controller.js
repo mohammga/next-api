@@ -25,13 +25,25 @@ export const listPoll = async (req, { params }) => {
 export const listPollsByUser = async (req, { params }) => {
     const authorId = params.authorId;
 
-    const polls = await pollsService.getByAuthorId({ authorId });
+    const polls = await pollsService.getPollsByAuthorId({ authorId });
 
     if (polls.error)
       return new Response(JSON.stringify(polls.error), { status: 500 });
 
     return new Response(JSON.stringify(polls));
 }
+
+export const listConductedPolls = async (req, { params }) => {
+  const userId = params.userId;
+
+  const polls = await pollsService.getConductedPollsByUserId({ userId });
+
+  if (polls.error)
+    return new Response(JSON.stringify(polls.error), { status: 500 });
+
+  return new Response(JSON.stringify(polls));
+}
+
 
 
 export const createPoll = async (req) => {
