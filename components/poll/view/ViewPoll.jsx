@@ -52,7 +52,7 @@ function ViewPoll({ data }) {
         </Button>
         <Dialog>
           <DialogTrigger asChild>
-            <Button>Del lenke</Button>
+            <Button>Del Lenke</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>

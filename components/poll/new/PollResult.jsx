@@ -22,7 +22,7 @@ export default function PollResult({ pollURL }) {
   };
 
     const handleBack = () => {
-    router.push("/poll");
+    router.push("/poll/my-poll");
   };
 
     const copyToClipboard = () => {
@@ -36,15 +36,17 @@ export default function PollResult({ pollURL }) {
 
 
   return (
-    <div className="flex flex-col">
-      <h1 className="text-3xl font-bold mb-4">Pollen din ble lagret!</h1>
-      <p>
-        Del lenken med andre for å se pollen:
-      </p>
 
-<Dialog>
+
+      <div className="py-4">
+          <h2 className="pb-2 text-xl font-semibold">Pollen din ble lagret</h2>
+          <p className="pb-2">Den er nå vellykket lagret i vårt system og er klar for å deles med andre.</p>
+
+          <div className="flex gap-2"> 
+          <Button onClick={handleBack}>Tilbake</Button>
+          <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Del</Button>
+        <Button variant="outline">Del Lenke</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
@@ -79,8 +81,13 @@ export default function PollResult({ pollURL }) {
       </DialogContent>
     </Dialog>
 
-      <Button onClick={handleBack}>Tilbake</Button>
-    </div>
+          </div>
+
+
+
+
+      </div>
+
   );
 }
 

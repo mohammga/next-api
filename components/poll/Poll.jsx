@@ -1,113 +1,121 @@
 "use client";
 
-import { Button } from "@/components/ui/button"
-import { useState } from "react";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { Button } from "@/components/ui/button";
+import { useSession } from 'next-auth/react';
 import { useRouter } from "next/navigation";
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 function Poll({ data, onFinish }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selected, setSelected] = useState([]);
-  const isAnswerSelected = typeof selected[currentIndex] !== "undefined";
-
+  const { data: session } = useSession();
   const router = useRouter();
 
-  const handleChoice = (optionIndex, index) => {
-    const newSelected = [...selected];
-    newSelected[index] = parseInt(optionIndex);
-    setSelected(newSelected);
-};
+  const validationSchema = Yup.object().shape({
+    answers: Yup.array()
+      .of(Yup.number().required('Valg er påkrevd'))
+      .required('All questions must be answered')
+      .test('answers-length', 'All questions must be answered', val => val && val.length === data.questions.length)
+  });
 
+  console.log("Poll data:", data);
 
-  const handleSubmit = async () => {
-    // Assuming you have a user ID. 
-    // TODO: Fetch this value properly, possibly from a user context or authentication.
-    const userId = "clnt69nie0002t3sox09fe9ie";
-  
-    // Preparing data to send to the backend
-    const answersData = {
-      pollId: data.id,
-      userId: userId,
-      answers: selected.map((choiceIndex, questionIndex) => ({
-        questionId: data.questions[questionIndex].id,
-        optionId: data.questions[questionIndex].options[choiceIndex].id
-      }))
-    };
+  const formik = useFormik({
+    initialValues: {
+      answers: Array(data.questions.length).fill(null)
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
 
-    console.log('Selected:', selected);
+      const answersData = {
+        pollId: data.id,
+        userId: session?.user?.id,
+        answers: values.answers.flatMap((optionId, questionIndex) => {
+          const question = data.questions[questionIndex];
+    
+          if (optionId) {
+            return {
+              questionId: question.id,
+              optionId: optionId,
+            };
+          }
+          return [];
+        })
+      };
 
-    console.log('Submitting answers:', answersData);
-  
-    // Send data to backend
-    try {
-      const response = await fetch('/api/answer', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(answersData),
-      });
-  
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.error);
+      try {
+        const response = await fetch("/api/answer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(answersData),
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error);
+        }
+
+        console.log("Answers saved successfully:", result);
+        formik.resetForm();
+
+        if (onFinish) {
+          onFinish();
+        }
+      } catch (error) {
+        console.error("Failed to submit answers:", error);
       }
-  
-      console.log('Answers saved successfully:', result);
-    } catch (error) {
-      console.error('Failed to submit answers:', error);
     }
-  };
-
+  });
 
   const handleBack = () => {
     router.push("/poll");
   };
 
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      <div className="w-full my-4 rounded-lg">
+        <h1 className="text-2xl font-bold mb-2">{data.title}</h1>
+        <p className="text-muted-foreground mb-4">{data.description}</p>
 
-return (
-  <form>
-    <div className="w-full my-4 rounded-lg">
-      <h1 className="text-2xl font-bold mb-2">{data.title}</h1>
-      <p className="text-muted-foreground mb-4">{data.description}</p>
-      {data.questions.map((question, index) => (
-    <div key={index} className="p-4 border border-border rounded-md mb-4">
-        <h2 className="text-lg font-semibold mb-2">
-            Spørsmål {index + 1}: {question.title}
-        </h2>
-
-        <div>
+        {data.questions.map((question, index) => (
+          <div key={index} className="p-4 border border-border rounded-md mb-4">
+            <h2 className="text-lg font-semibold mb-2">
+              Spørsmål {index + 1}: {question.title}
+            </h2>
             <label className="mb-8">Velg et alternativ nedenfor:</label>
             <RadioGroup
-                value={selected[index]}
-                onValueChange={value => handleChoice(value, index)}
+              value={formik.values.answers[index]}
+              onValueChange={(value) => {
+                const answers = [...formik.values.answers];
+                answers[index] = parseInt(value);
+                formik.setFieldValue('answers', answers);
+              }}
             >
-                {question.options.map((option, optionIndex) => (
-                    <div key={option.id} className="flex items-center space-x-2">
-                        <RadioGroupItem value={optionIndex.toString()}>
-                        </RadioGroupItem>
-                        <Label>{option.title}</Label>
-                    </div>
-                ))}
+              {question.options.map((option, optionIndex) => (
+                <div key={option.id} className="flex items-center space-x-2">
+                  <RadioGroupItem value={optionIndex}></RadioGroupItem>
+                  <Label>{option.title}</Label>
+                </div>
+              ))}
             </RadioGroup>
+            {formik.touched.answers && formik.errors.answers && <div className="text-red-500 mt-2">{formik.errors.answers}</div>}
+          </div>
+        ))}
+
+        <div className="flex gap-4 mt-4">
+          <Button type="button" variant="outline" onClick={handleBack}>
+            Tilbake
+          </Button>
+          <Button type="submit">
+            Send
+          </Button>
         </div>
-    </div>
-))}
-
-      <div className="flex gap-4 mt-4">
-        <Button type="button" variant="outline" onClick={handleBack}>
-          Tilbake
-        </Button>
-        <Button type="submit" onClick={handleSubmit}>
-          Send
-        </Button>
       </div>
-    </div>
-  </form>
-);
-
+    </form>
+  );
 }
 
 export default Poll;

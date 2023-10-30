@@ -1,16 +1,14 @@
+import { Button } from "@/components/ui/button";
+
 function Result({ onRestart }) {
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen flex flex-col items-center justify-center">
-      <h2 className="text-2xl font-bold mb-8">
-        Takk for ditt svar!
-      </h2>
-      <button
-        onClick={onRestart}
-        className="bg-green-500 hover:bg-green-600 text-white py-2 px-8 rounded transition duration-150 mt-8"
-      >
+    <div className="py-4">
+      <h2 className="pb-2 text-xl font-semibold">Takk for ditt svar!</h2>
+      <p className="pb-2">Pollen er nå velykket sendt og gjennomført.</p>
+      <Button onClick={onRestart}>
         Lukk
-      </button>
+      </Button>
     </div>
   );
 }

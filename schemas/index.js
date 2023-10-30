@@ -87,3 +87,27 @@ export const validationCreatePoll = Yup.object().shape({
     .max(500, "Beskrivelsen kan inneholde maksimalt 500 tegn") // Adjust the max length as needed
     // You can add more specific constraints here, such as disallowing certain characters or words, if needed.
 });
+
+
+export const questionValidationSchema = Yup.object().shape({
+  polls: Yup.array().of(
+    Yup.object().shape({
+      title: Yup.string().required("Spørsmål er påkrevd"),
+      options: Yup.array().of(
+        Yup.object().shape({
+          option: Yup.string().required("Svaralternativ er påkrevd"),
+        })
+      ),
+    })
+  ),
+});
+
+export const isAnyFieldEmpty = (values) => {
+  let isEmpty = false;
+  values.polls.forEach((question) => {
+    if (!question.title || question.options.some((option) => !option.option)) {
+      isEmpty = true;
+    }
+  });
+  return isEmpty;
+};

@@ -26,7 +26,7 @@ export default function Page() {
   const handleRestart = () => {
     setIsFinished(false);
     setUserAnswers([]);
-    router.push("/poll");
+    router.push("/poll/conducted-poll");
   };
 
 

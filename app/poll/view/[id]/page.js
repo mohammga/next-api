@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import ViewPoll from "@/components/poll/ViewPoll";
+import ViewPoll from "@/components/poll/view/ViewPoll";
 import { useParams } from "next/navigation";
 
 export default function Poll() {

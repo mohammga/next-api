@@ -13,15 +13,6 @@ export async function POST(req) {
       }
     });
 
-    // Saving each answer
-    for (const answer of answers) {
-      await prisma.answer.create({
-        data: {
-          conductedPollId: conductedPoll.id,
-          optionId: answer.optionId
-        }
-      });
-    }
 
     return new NextResponse(
       JSON.stringify({
