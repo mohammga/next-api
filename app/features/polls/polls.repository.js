@@ -15,7 +15,6 @@ export const findMany = async ({id}) => {
         createdAt: true,
       },
     });
-    console.log({id});
     return { success: true, data: polls };
   } catch (error) {
     console.log(error);
@@ -111,9 +110,11 @@ export const findUnique = async (identifier) => {
         authorId: true,
         questions: {
             select: {
+              id: true,
                 title: true,
                 options: {
                     select: {
+                        id: true,
                         title: true
                     }
                 }
