@@ -7,7 +7,6 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import { capitalizeString } from "@/utils/capitalizeString";
 
 export default function PollStart({ setPollTitle, setPollDescription, nextStep }) {
-
   const handleSubmit = async (values) => {
     setPollTitle(capitalizeString(values.title))
     setPollDescription(capitalizeString(values.description))
@@ -18,7 +17,7 @@ export default function PollStart({ setPollTitle, setPollDescription, nextStep }
     <div className="flex justify-center md:items-center h-full">
       <div className="flex w-full md:w-[550px] flex-col">
         <div>
-          <h1 className="text-xl font-semibold py-4">Opprett en Poll</h1>
+          <h1 className="text-3xl font-bold py-4">Opprett en poll</h1>
         </div>
         <Formik
           initialValues={{ title: "", description: "" }}

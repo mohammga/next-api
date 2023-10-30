@@ -28,6 +28,8 @@ function Poll({ data, onFinish }) {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
 
+      console.log("Submitting answers:", values);
+
       const answersData = {
         pollId: data.id,
         userId: session?.user?.id,
@@ -96,7 +98,7 @@ function Poll({ data, onFinish }) {
             >
               {question.options.map((option, optionIndex) => (
                 <div key={option.id} className="flex items-center space-x-2">
-                  <RadioGroupItem value={optionIndex}></RadioGroupItem>
+                  <RadioGroupItem value={option.id}></RadioGroupItem>
                   <Label>{option.title}</Label>
                 </div>
               ))}

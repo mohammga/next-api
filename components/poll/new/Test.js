@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, TrashIcon } from "@radix-ui/react-icons";
-import { questionValidationSchema, isAnyFieldEmpty } from "@/schemas/index";
+import { questionValidationSchema } from "@/schemas/index";
 import { capitalizeString } from "@/utils/capitalizeString";
 
 export default function Test({
@@ -18,6 +18,9 @@ export default function Test({
       {
         title: "",
         options: [
+          {
+            option: "",
+          },
           {
             option: "",
           },
@@ -69,9 +72,9 @@ export default function Test({
       validationSchema={questionValidationSchema}
       onSubmit={handleSubmit}
     >
-      {({ handleChange, handleBlur, values, isValid }) => (
+      {({ handleChange, handleBlur, values }) => (
         <div className="flex mx-auto w-full sm:w-4/5 md:w-2/3 lg:w-1/2 xl:w-1/3 flex-col space-y-4 border-none shadow-none">
-          <h1 className="text-3xl font-bold mb-4"> {pollTitle} </h1>
+          <h1 className="text-3xl font-bold py-4"> {pollTitle} </h1>
           <Form>
             <FieldArray name="polls">
               {({ remove, push }) => (
@@ -156,6 +159,7 @@ export default function Test({
                               <Button
                                 onClick={() => pushOption({ option: "" })}
                                 variant="outline"
+                                type="button"
                               >
                                 <PlusIcon className="mr-2 h-4 w-4" />
                                 Legg til svaralternativ
@@ -169,6 +173,7 @@ export default function Test({
                   {values.polls.length < 10 && (
                     <Button
                       variant="secondary"
+                      type="button"
                       onClick={() =>
                         push({
                           title: "",
@@ -184,7 +189,6 @@ export default function Test({
                   <div className="mt-4">
                     <Button
                       type="submit"
-                      disabled={isAnyFieldEmpty(values) || !isValid}
                     >
                       Lagre poll
                     </Button>

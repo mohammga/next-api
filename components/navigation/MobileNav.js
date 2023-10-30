@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useLockBody } from "@/hooks/UseLockBody";
+import { useLockBody } from "@/hooks/useLockBody";
 import { cn } from "@/lib/utils";
 
 export function MobileNav({ children, closeMenu }) {

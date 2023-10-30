@@ -112,14 +112,3 @@ export const questionValidationSchema = Yup.object().shape({
     })
   ),
 });
-
-
-export const isAnyFieldEmpty = (values) => {
-  let isEmpty = false;
-  values.polls.forEach((question) => {
-    if (!question.title || question.options.some((option) => !option.option)) {
-      isEmpty = true;
-    }
-  });
-  return isEmpty;
-};
