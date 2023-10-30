@@ -16,6 +16,7 @@ export default function SignupForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+
   const handleSubmit = async (values, actions) => {
     var { name, email, password } = values;
     const userName = `${name.slice(0, 1).toUpperCase()}${name

@@ -6,11 +6,6 @@ import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Hjemmeside - Pollify",
-  description: "Poll...",
-};
-
 export default function RootLayout({ children }) {
   return (
     <html lang="no" suppressHydrationWarning className="scroll-smooth">

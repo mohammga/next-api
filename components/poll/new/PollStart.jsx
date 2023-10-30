@@ -4,12 +4,13 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button"
 import { validationCreatePoll } from '@/schemas/index';
 import { Formik, Form, ErrorMessage } from 'formik';
+import { capitalizeString } from "@/utils/capitalizeString";
 
 export default function PollStart({ setPollTitle, setPollDescription, nextStep }) {
 
   const handleSubmit = async (values) => {
-    setPollTitle(values.title)
-    setPollDescription(values.description)
+    setPollTitle(capitalizeString(values.title))
+    setPollDescription(capitalizeString(values.description))
     nextStep();
   };
 
@@ -32,6 +33,7 @@ export default function PollStart({ setPollTitle, setPollDescription, nextStep }
                   id="title"
                   name="title"
                   type="text"
+                  maxLength={25}
                   value={values.title}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -51,6 +53,7 @@ export default function PollStart({ setPollTitle, setPollDescription, nextStep }
                   id="description"
                   name="description"
                   type="text"
+                  maxLength={100}
                   value={values.description}
                   onChange={handleChange}
                   onBlur={handleBlur}

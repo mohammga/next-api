@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
+import { cn } from "@/lib/utils";
 
 export default function PollNavigation() {
   const { setTheme } = useTheme();
@@ -87,20 +88,37 @@ export default function PollNavigation() {
             {(isPoll || isPollRoute) && (
               <nav className="hidden gap-6 md:flex">
                 <Link
-                  className="hover:underline rounded-md text-sm font-medium transition-colors"
                   href={"/poll"}
+                  className={cn(
+                    "flex items-center text-lg font-medium transition-colors hover:underline hover:text-foreground/80 sm:text-sm",
+                    pathname === "/poll"
+                      ? "text-foreground"
+                      : "text-foreground/60"
+                  )}
                 >
                   Pollify Community
                 </Link>
+
                 <Link
-                  className="hover:underline rounded-md text-sm font-medium transition-colors"
                   href={"/poll/my-poll"}
+                  className={cn(
+                    "flex items-center text-lg font-medium transition-colors hover:underline hover:text-foreground/80 sm:text-sm",
+                    pathname === "/poll/my-poll"
+                      ? "text-foreground"
+                      : "text-foreground/60"
+                  )}
                 >
                   Mine Poll
                 </Link>
+
                 <Link
-                  className="hover:underline rounded-md text-sm font-medium transition-colors"
                   href={"/poll/conducted-poll"}
+                  className={cn(
+                    "flex items-center text-lg font-medium transition-colors hover:underline hover:text-foreground/80 sm:text-sm",
+                    pathname === "/poll/conducted-poll"
+                      ? "text-foreground"
+                      : "text-foreground/60"
+                  )}
                 >
                   Gjennomførte Poll
                 </Link>

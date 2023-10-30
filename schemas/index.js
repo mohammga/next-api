@@ -75,32 +75,44 @@ export const validationLogin = Yup.object().shape({
   password: Yup.string().required("Passord er påkrevd"),
 });
 
+
 export const validationCreatePoll = Yup.object().shape({
   title: Yup.string()
     .required("Tittel er påkrevd")
     .min(3, "Tittelen må inneholde minst 3 bokstaver")
-    .max(100, "Tittelen kan inneholde maksimalt 100 tegn"), // Adjust the max length as needed
+    .max(25, "Tittelen kan inneholde maksimalt 25 tegn")
+    .matches(/^[a-zA-Z0-9æøåÆØÅ]+( [a-zA-Z0-9æøåÆØÅ]+)*$/, "Tittelen kan ikke inneholde spesialtegn eller starte/slutte med mellomrom"),
 
   description: Yup.string()
     .required("Beskrivelse er påkrevd")
     .min(3, "Beskrivelsen må inneholde minst 3 bokstaver")
-    .max(500, "Beskrivelsen kan inneholde maksimalt 500 tegn") // Adjust the max length as needed
-    // You can add more specific constraints here, such as disallowing certain characters or words, if needed.
+    .max(100, "Beskrivelsen kan inneholde maksimalt 100 tegn")
+    .matches(/^[a-zA-Z0-9æøåÆØÅ]+( [a-zA-Z0-9æøåÆØÅ]+)*$/, "Beskrivelsen kan ikke inneholde spesialtegn eller starte/slutte med mellomrom")
 });
+
 
 
 export const questionValidationSchema = Yup.object().shape({
   polls: Yup.array().of(
     Yup.object().shape({
-      title: Yup.string().required("Spørsmål er påkrevd"),
+      title: Yup.string()
+      .required("Spørsmål er påkrevd")
+      .matches(/^[^\s].*[^\s]$/, "Spørsmål kan ikke starte eller slutte med mellomrom")
+      .min(3, "Spørsmål må inneholde minst 3 bokstaver")
+      .max(50, "Spørsmål kan inneholde maksimalt 50 tegn"),
       options: Yup.array().of(
         Yup.object().shape({
-          option: Yup.string().required("Svaralternativ er påkrevd"),
+          option: Yup.string()
+            .required("Svaralternativ er påkrevd")
+            .matches(/^[^\s].*[^\s]$/, "Spørsmål kan ikke starte eller slutte med mellomrom")
+            .min(1, "Svaralternativ må inneholde minst 1 bokstav")
+            .max(50, "Svaralternativ kan inneholde maksimalt 50 tegn")
         })
       ),
     })
   ),
 });
+
 
 export const isAnyFieldEmpty = (values) => {
   let isEmpty = false;

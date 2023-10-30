@@ -68,8 +68,7 @@ function ViewPoll({ data }) {
                 </Label>
                 <Input
                   id="link"
-                  defaultValue={`http://localhost:3000`}
-                  readOnly
+                  defaultValue={process.env.NEXT_PUBLIC_URL + "/poll/" + data.id}
                 />
               </div>
               <Button
