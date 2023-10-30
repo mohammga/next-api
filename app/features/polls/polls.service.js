@@ -3,9 +3,7 @@ import * as usersRepo from "../users/users.repository";
 
 export const list = async ({ id }) => {
   const polls = await pollsRepo.findMany({ id });
-
-    console.log(id);
-
+  
   if (!polls.success) return { success: false, error: polls.error };
 
   return { success: true, data: polls.data };
@@ -54,8 +52,7 @@ export const create = async ({ title, description, questions, email }) => {
       error: `User with ${email} does not exist`,
     }
   }
-
-  // sender nødvendig data for å lage en feed
+  
   const createdPoll = await pollsRepo.create({
     title,
     description,

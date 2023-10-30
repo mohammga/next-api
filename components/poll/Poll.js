@@ -12,18 +12,20 @@ function Poll({ data, onFinish }) {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const validationSchema = Yup.object().shape({
-    answers: Yup.array()
-      .of(Yup.number().required('Valg er påkrevd'))
-      .required('All questions must be answered')
-      .test('answers-length', 'All questions must be answered', val => val && val.length === data.questions.length)
-  });
+  const validationSchema = Yup.array().of(
+    Yup.object({
+      questionId: Yup.string().required(),
+      optionId: Yup.string().required(),
+    })
+  );
 
   console.log("Poll data:", data);
-
   const formik = useFormik({
     initialValues: {
-      answers: Array(data.questions.length).fill(null)
+      answers: data.questions.map(question => ({
+        questionId: question.id,
+        optionId: ''
+      }))
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -33,18 +35,12 @@ function Poll({ data, onFinish }) {
       const answersData = {
         pollId: data.id,
         userId: session?.user?.id,
-        answers: values.answers.flatMap((optionId, questionIndex) => {
-          const question = data.questions[questionIndex];
-    
-          if (optionId) {
-            return {
-              questionId: question.id,
-              optionId: optionId,
-            };
-          }
-          return [];
-        })
+        answers: values.answers.map(answer => ({
+          questionId: answer.questionId,
+          optionId: answer.optionId
+        }))
       };
+      
 
       try {
         const response = await fetch("/api/answer", {
@@ -84,25 +80,32 @@ function Poll({ data, onFinish }) {
 
         {data.questions.map((question, index) => (
           <div key={index} className="p-4 border border-border rounded-md mb-4">
-            <h2 className="text-lg font-semibold mb-2">
+            <h2 key={question.id} className="text-lg font-semibold mb-2">
               Spørsmål {index + 1}: {question.title}
             </h2>
             <label className="mb-8">Velg et alternativ nedenfor:</label>
-            <RadioGroup
-              value={formik.values.answers[index]}
-              onValueChange={(value) => {
-                const answers = [...formik.values.answers];
-                answers[index] = parseInt(value);
-                formik.setFieldValue('answers', answers);
-              }}
-            >
-              {question.options.map((option, optionIndex) => (
-                <div key={option.id} className="flex items-center space-x-2">
-                  <RadioGroupItem value={option.id}></RadioGroupItem>
-                  <Label>{option.title}</Label>
-                </div>
-              ))}
-            </RadioGroup>
+          
+            {question.options.map((option) => (
+            <div key={option.id} className="flex items-center space-x-2">
+              <input
+                type="radio"
+                name={`answers[${index}].optionId`}
+                value={option.id}
+                checked={formik.values.answers[index].optionId === option.id}
+                onChange={() => {
+                  const updatedAnswer = {
+                    ...formik.values.answers[index], 
+                    optionId: option.id
+                  };
+                  formik.setFieldValue(`answers[${index}]`, updatedAnswer);
+                }}
+                
+              />
+              <Label>{option.title}</Label>
+            </div>
+          ))}
+
+
             {formik.touched.answers && formik.errors.answers && <div className="text-red-500 mt-2">{formik.errors.answers}</div>}
           </div>
         ))}
