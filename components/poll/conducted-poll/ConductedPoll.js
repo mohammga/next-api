@@ -22,7 +22,6 @@ function ConductedPoll() {
       })
       .then((polls) => {
         setConductedPolls(polls.data);
-        console.log(polls);
         setIsLoading(false);
       })
       .catch((error) => {

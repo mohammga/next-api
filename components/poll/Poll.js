@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { useSession } from 'next-auth/react';
 import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 function Poll({ data, onFinish }) {
   const { data: session } = useSession();
@@ -19,7 +18,6 @@ function Poll({ data, onFinish }) {
     })
   );
 
-  console.log("Poll data:", data);
   const formik = useFormik({
     initialValues: {
       answers: data.questions.map(question => ({

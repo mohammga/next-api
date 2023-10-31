@@ -9,8 +9,8 @@ export const list = async ({ id }) => {
   return { success: true, data: polls.data };
 };
 
-export const getByUrl = async ({ id }) => {
-  const poll = await pollsRepo.findUnique({ id })
+export const getByUrl = async ({ id, userId }) => {
+  const poll = await pollsRepo.findUnique({ id, userId })
 
   if (!poll.success) return { success: false, error: poll.error }
   if (!poll.data)
@@ -20,7 +20,7 @@ export const getByUrl = async ({ id }) => {
       error: `Poll with ${id} does not exist`,
     }
 
-  return { success: true, data: poll.data }
+  return { success: true, data: poll.data, hasTaken: poll.hasTaken }
 }
 
 export const getPollsByAuthorId = async ({ authorId }) => {

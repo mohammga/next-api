@@ -5,6 +5,8 @@ import Poll from "@/components/poll/Poll";
 import Result from "@/components/poll/Result";
 import { useRouter, useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Button } from "@/components/ui/button";
+
 
 export default function Take() {
   const [hasTakenPoll, setHasTakenPoll] = useState(false);
@@ -29,8 +31,10 @@ export default function Take() {
     router.push("/poll/conducted-poll");
   };
 
+  const handleBack = () => {
+    router.push("/poll");
+  }
 
-  //sjekke om brukeren har tatt pollen fra før og kan ikke ta den igjen
 
   useEffect(() => {
     fetch(`/api/polls/${id}`)
@@ -41,8 +45,13 @@ export default function Take() {
         return response.json();
       })
       .then((poll) => {
-        setPollData(poll.data);
-        setHasTakenPoll(poll.hasTaken);
+        
+        if(poll.hasTaken) {
+          setHasTakenPoll(true);
+        }
+        else{
+          setPollData(poll.data);
+        }
       })
       .catch((error) => {
         console.error("Failed to fetch poll data:", error);
@@ -50,29 +59,43 @@ export default function Take() {
       });
   }, []);
 
+
 return (
-  <div>
-    {hasError ? (
-      <p className="py-4">Pollen du prøver å få tilgang til eksisterer ikke.</p>
-    ) : hasTakenPoll ? (
-      <p className="py-4">Du kan ikke ta denne pollen igjen.</p>
-    ) : pollData ? (
-      session?.user?.id === pollData.authorId ? (
-        <p className="py-4">
-          Du kan ikke gjennomføre denne pollen, fordi du er forfatteren.
-        </p>
-      ) : !isFinished ? (
-        <Poll data={pollData} onFinish={handleFinish} />
-      ) : (
-        <Result
-          questions={pollData}
-          answers={userAnswers}
-          onRestart={handleRestart}
-        />
-      )
+<div>
+  {hasTakenPoll ? (
+    <div className="py-4">
+    <p className="pb-2">Du har allerede gjennomført denne pollen og kan ikke ta den på nytt.</p>
+    <Button onClick={handleBack}>Ta en annen poll</Button>
+
+    </div>
+    
+  ) : hasError ? (
+    <div className="py-4">
+    <p className="pb-2">Pollen du prøver å tilgang til eksisterer ikke, ta en annen poll.</p>
+    <Button onClick={handleBack}>Ta en annen poll</Button>
+
+    </div>
+
+  ) : pollData ? (
+    session?.user?.id === pollData.authorId ? (
+        <div className="py-4">
+        <p className="pb-2">Du kan ikke gjennomføre denne pollen, fordi du er forfatteren.</p>
+        <Button onClick={handleBack}>Ta en annen poll</Button>
+
+        </div>
+
+    ) : !isFinished ? (
+      <Poll data={pollData} onFinish={handleFinish} />
     ) : (
-     <p className="py-4">Laster inn...</p>
-    )}
-  </div>
-);
+      <Result
+        questions={pollData}
+        answers={userAnswers}
+        onRestart={handleRestart}
+      />
+    )
+  ) : (
+    <p className="py-4">Laster inn...</p>
+  )}
+</div>
+)
 }

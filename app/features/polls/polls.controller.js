@@ -10,11 +10,9 @@ export const listPolls = async (req, { id }) => {
 };
 
 
-
-export const listPoll = async (req, { params }) => {
+export const listPoll = async (req, { params, userId}) => {
   const id = params.id;
-
-  const polls = await pollsService.getByUrl({ id });
+  const polls = await pollsService.getByUrl({ id, userId });
 
   if (polls.error)
     return new Response(JSON.stringify(polls.error), { status: 500 });
