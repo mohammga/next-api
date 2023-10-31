@@ -46,7 +46,7 @@ export function View() {
       ) : pollData ? (
         <ViewPoll data={pollData} pollId={id} />
       ) : (
-        <p>Laster inn...</p>
+        <p className="py-4">Laster inn...</p>
       )}
     </div>
   );

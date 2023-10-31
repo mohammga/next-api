@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import Poll from "@/components/poll/Poll";
-import Result from "@/components/poll/Result";
+import TakePoll from "@/components/poll/take/TakePoll";
+import TakePollResult from "@/components/poll/take/TakePollResult";
 import { useRouter, useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
@@ -85,9 +85,9 @@ return (
         </div>
 
     ) : !isFinished ? (
-      <Poll data={pollData} onFinish={handleFinish} />
+      <TakePoll data={pollData} onFinish={handleFinish} />
     ) : (
-      <Result
+      <TakePollResult
         questions={pollData}
         answers={userAnswers}
         onRestart={handleRestart}
