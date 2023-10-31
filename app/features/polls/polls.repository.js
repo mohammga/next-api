@@ -1,12 +1,26 @@
 import { prisma } from '@/lib/prisma';
 
-export const findMany = async ({id}) => {
+export const findMany = async ({ id }) => {
   try {
+    const conductedPolls = await prisma.conductedPoll.findMany({
+      where: {
+        userId: id
+      },
+      select: {
+        pollId: true
+      }
+    });
+
+    const conductedPollIds = conductedPolls.map(p => p.pollId);
+
     const polls = await prisma.poll.findMany({
       where: {
         authorId: {
           not: id,
         },
+        id: {
+          notIn: conductedPollIds
+        }
       },
       select: {
         id: true,
@@ -21,6 +35,7 @@ export const findMany = async ({id}) => {
     return { success: false, error: "Failed finding polls" };
   }
 };
+
 
 
 export const findUserPolls = async (identifier) => {
@@ -122,11 +137,11 @@ export const exist = async (identifier) => {
   }
 }
 
-export const findUnique = async (identifier) => {
+export const findUnique = async ({id, userId}) => {
   try {
     const poll = await prisma.poll.findUnique({
       where: {
-        ...identifier,
+        id: id
       },
       select: {
         id: true,
@@ -145,12 +160,37 @@ export const findUnique = async (identifier) => {
                 }
             }
         }
+      }
+    });
+
+    if (!poll) {
+      return { success: false, error: 'Poll not found' };
     }
-    })
 
+    // Sjekk om poll allerede er tatt av brukeren
+    const conducted = await prisma.conductedPoll.findFirst({
+      where: {
+        AND: [
+          {
+            userId: {
+              equals: userId
+            }
+          },
+          {
+            pollId: {
+              equals: poll.id
+            }
+          },
+        ],
+      },
+    });
+    
+    
+    const hasTaken = Boolean(conducted);
 
-    return { success: true, data: poll }
+    return { success: true, data: poll, hasTaken: hasTaken };
   } catch (error) {
-    return { success: false, error: 'Failed finding poll' }
+    console.log(error);  // For bedre logging
+    return { success: false, error: 'Failed finding poll' };
   }
-}
+};
