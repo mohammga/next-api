@@ -25,9 +25,11 @@ export default function PollStart({ setPollTitle, setPollDescription, nextStep }
           onSubmit={handleSubmit}
         >
           {({ errors, handleChange, handleBlur, values }) => (
-            <Form className="space-y-4">
-              <div>
-                <Label htmlFor="title">Tittel:</Label>
+            <Form className="space-y-6">
+
+            <Label htmlFor="title">Tittel:</Label>
+
+              <div className="my-2">
                 <Input
                   id="title"
                   name="title"

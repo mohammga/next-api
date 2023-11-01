@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { validationSignup } from "@/schemas/index";
 import ErrorMessages from "@/components/alerts/ErrorMessages";
+import { CaretLeftIcon } from "@radix-ui/react-icons";
 
 
 export default function SignupForm() {
@@ -194,14 +195,15 @@ export default function SignupForm() {
                 </Button>
 
                 <Button
-                  onClick={() => router.push("/")}
-                  className="w-full"
-                  type="button"
-                  variant="outline"
-                  size="default"
-                >
-                  Tilbake til innlogging
-                </Button>
+                      type="button"
+                      onClick={() => router.push("/")}
+                      className="w-full"
+                      size="default"
+                      variant="outline"
+                    >
+                      <CaretLeftIcon className="h-6 w-6" /> Tilbake til
+                      innlogging
+                    </Button>
               </div>
             </Form>
           )}

@@ -141,7 +141,7 @@ export default function LoginForm() {
             </Form>
           )}
         </Formik>
-        <p className="mt-10 text-center text-sm text-muted-foreground">
+        <p className="mt-2 text-center text-sm text-muted-foreground">
           Har du ikke en konto?{" "}
           <Link
             href="/signup"

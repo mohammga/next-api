@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ChevronLeftIcon, Share1Icon } from "@radix-ui/react-icons";
+
 
 function ViewPoll({ data }) {
   const router = useRouter();
@@ -48,17 +50,21 @@ function ViewPoll({ data }) {
       ))}
       <div className="flex gap-4 mt-4">
         <Button variant="outline" onClick={handleBack}>
+         <ChevronLeftIcon className="h-4 w-4 mr-1" />
           Tilbake
         </Button>
         <Dialog>
           <DialogTrigger asChild>
-            <Button>Del Lenke</Button>
+            <Button>
+            <Share1Icon className="h-4 w-4 mr-2" />
+              Del Lenke
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Del linken</DialogTitle>
+              <DialogTitle>Del lenken</DialogTitle>
               <DialogDescription>
-                Alle som har denne linken vil kunne se denne.
+                Alle som har denne lenken kan se og svare på pollen.
               </DialogDescription>
             </DialogHeader>
             <div className="flex items-center space-x-2">
