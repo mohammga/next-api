@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 
-function Result({ onRestart }) {
+function TakePollResult({ onRestart }) {
   return (
     <div className="py-4">
       <h2 className="pb-2 text-xl font-semibold">Takk for ditt svar!</h2>
@@ -12,4 +12,4 @@ function Result({ onRestart }) {
   );
 }
 
-export default Result;
+export default TakePollResult;

@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChevronLeftIcon, Share1Icon } from "@radix-ui/react-icons";
 
-export default function PollResult({ pollURL }) {
+export default function NewPollResult({ pollURL }) {
   const router = useRouter();
   const handleBack = () => {
     router.push("/poll/my-poll");

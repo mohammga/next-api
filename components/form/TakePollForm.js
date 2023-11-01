@@ -164,4 +164,4 @@ function TakePollForm({ data, onFinish, isLoading, setIsLoading }) {
   );
 }
 
-export default Poll;
+export default TakePollForm;

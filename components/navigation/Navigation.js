@@ -24,7 +24,7 @@ import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 
-export default function PollNavigation() {
+export default function Navigation() {
   const { setTheme } = useTheme();
   const router = useRouter();
   const pathname = usePathname();
