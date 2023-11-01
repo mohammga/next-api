@@ -14,6 +14,7 @@ export default function Take() {
   const [userAnswers, setUserAnswers] = useState([]);
   const [pollData, setPollData] = useState(null);
   const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
 
   const router = useRouter();
@@ -85,7 +86,7 @@ return (
         </div>
 
     ) : !isFinished ? (
-      <TakePoll data={pollData} onFinish={handleFinish} />
+      <TakePoll data={pollData} onFinish={handleFinish} isLoading={isFinished} setIsLoading={setIsLoading} />
     ) : (
       <TakePollResult
         questions={pollData}

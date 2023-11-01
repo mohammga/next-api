@@ -13,14 +13,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ChevronLeftIcon, Share1Icon } from "@radix-ui/react-icons";
 
 export default function PollResult({ pollURL }) {
   const router = useRouter();
-
-  const handleView = () => {
-    router.push(pollURL);
-  };
-
   const handleBack = () => {
     router.push("/poll/my-poll");
   };
@@ -41,16 +37,22 @@ export default function PollResult({ pollURL }) {
       </p>
 
       <div className="flex gap-2">
-        <Button onClick={handleBack}>Tilbake</Button>
+        <Button variant="outline" onClick={handleBack}>
+         <ChevronLeftIcon className="h-4 w-4 mr-1" />
+          Tilbake
+        </Button>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="outline">Del Lenke</Button>
+          <Button>
+            <Share1Icon className="h-4 w-4 mr-2" />
+              Del Lenke
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Del linken</DialogTitle>
+              <DialogTitle>Del lenken</DialogTitle>
               <DialogDescription>
-                Alle som har denne linken vil kunne se denne.
+              Alle som har denne lenken kan se og svare på pollen.
               </DialogDescription>
             </DialogHeader>
             <div className="flex items-center space-x-2">
