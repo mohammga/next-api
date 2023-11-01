@@ -114,7 +114,7 @@ export default function NewPollForm({
                           <div className="space-y-3">
                             <div>
                               <div className="pb-2">
-                                <Label htmlFor="pollTitle">Tittel:</Label>
+                                <Label htmlFor="pollTitle">Tittel</Label>
                               </div>
 
                               <div>
@@ -142,7 +142,7 @@ export default function NewPollForm({
                             <div>
                               <div className="pb-2">
                                 <Label htmlFor="pollDescription">
-                                  Beskrivelse:
+                                  Beskrivelse
                                 </Label>
                               </div>
 
@@ -175,7 +175,7 @@ export default function NewPollForm({
                             <Label
                               htmlFor={`polls.${questionIndex}.questionTitle`}
                             >
-                              Spørsmål {questionIndex + 1}:
+                              Spørsmål {questionIndex + 1}
                             </Label>
                           </div>
                           <div className="flex gap-3">
@@ -209,7 +209,7 @@ export default function NewPollForm({
                         </div>
                         <div className="mt-6">
                           <div className="pb-2">
-                            <Label>Svaralternativer:</Label>
+                            <Label>Svaralternativer</Label>
                           </div>
                           <FieldArray
                             name={`polls.${questionIndex}.questionOptions`}
