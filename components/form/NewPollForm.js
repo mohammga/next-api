@@ -1,3 +1,5 @@
+"use client";
+
 import { Formik, Form, ErrorMessage, FieldArray } from "formik";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,7 +11,7 @@ import { capitalizeString } from "@/utils/capitalizeString";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 
-export default function Test({
+export default function NewPollForm({
   session,
   setPollURL,
   setShowResult,
@@ -51,12 +53,12 @@ export default function Test({
         })),
       })),
     };
-  
+
     try {
       setIsLoading(true);
-  
+
       await new Promise((resolve) => setTimeout(resolve, 1000));
-  
+
       const response = await fetch("/api/polls/", {
         method: "POST",
         headers: {
@@ -64,9 +66,9 @@ export default function Test({
         },
         body: JSON.stringify(pollData),
       });
-  
+
       const responseData = await response.json();
-  
+
       if (response.ok) {
         setIsLoading(false);
         setPollURL(`/poll/${responseData.data.id}`);

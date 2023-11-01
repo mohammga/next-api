@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import { Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,13 +40,13 @@ export default function PollResult({ pollURL }) {
 
       <div className="flex gap-2">
         <Button variant="outline" onClick={handleBack}>
-         <ChevronLeftIcon className="h-4 w-4 mr-1" />
+          <ChevronLeftIcon className="h-4 w-4 mr-1" />
           Tilbake
         </Button>
         <Dialog>
           <DialogTrigger asChild>
-          <Button>
-            <Share1Icon className="h-4 w-4 mr-2" />
+            <Button>
+              <Share1Icon className="h-4 w-4 mr-2" />
               Del Lenke
             </Button>
           </DialogTrigger>
@@ -52,7 +54,7 @@ export default function PollResult({ pollURL }) {
             <DialogHeader>
               <DialogTitle>Del lenken</DialogTitle>
               <DialogDescription>
-              Alle som har denne lenken kan se og svare på pollen.
+                Alle som har denne lenken kan se og svare på pollen.
               </DialogDescription>
             </DialogHeader>
             <div className="flex items-center space-x-2">

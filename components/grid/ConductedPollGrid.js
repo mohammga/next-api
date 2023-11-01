@@ -1,3 +1,5 @@
+"use client";
+
 import ConductedCard from "../card/ConductedCard";
 
 function ConductedPollGird({ data, title }) {

@@ -1,3 +1,5 @@
+"use client";
+
 import MyPollCard from "../card/MyPollCard";
 
 function MyPollGird({ data, title }) {

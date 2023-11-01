@@ -1,3 +1,5 @@
+"use client";
+
 import PollifyCard from "../card/PollifyCard";
 
 function PollifyCardGrid({ data, title }) {

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import TakePoll from "@/components/poll/take/TakePoll";
+import TakePollForm from "@/components/form/TakePollForm";
 import TakePollResult from "@/components/poll/take/TakePollResult";
 import { useRouter, useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -86,7 +86,7 @@ return (
           <Button onClick={handleBack}>Ta en annen poll</Button>
         </div>
       ) : !isFinished ? (
-        <TakePoll
+        <TakePollForm
           data={pollData}
           onFinish={handleFinish}
           isLoading={isFinished}

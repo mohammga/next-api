@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { CaretLeftIcon } from "@radix-ui/react-icons";
 
-function Poll({ data, onFinish, isLoading, setIsLoading }) {
+function TakePollForm({ data, onFinish, isLoading, setIsLoading }) {
   const { data: session } = useSession();
   const router = useRouter();
 

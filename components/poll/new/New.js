@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import NewPollResult from '@/components/poll/new/NewPollResult';
 import { useSession } from 'next-auth/react';
-import NewPollForm from '@/components/poll/new/NewPollForm';
+import NewPollForm from '@/components/form/NewPollForm';
 
 
 export default function New() {

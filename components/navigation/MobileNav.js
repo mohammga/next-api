@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLockBody } from "@/hooks/useLockBody";
@@ -49,8 +51,6 @@ export function MobileNav({ children, closeMenu }) {
           >
             Gjennomførte poll
           </Link>
-
-
         </nav>
 
         {children}
