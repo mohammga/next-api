@@ -33,7 +33,7 @@ export default function PollResult({ pollURL }) {
   return (
     <div className="py-4">
       <h2 className="pb-2 text-xl font-semibold">Pollen din ble lagret</h2>
-      <p className="pb-2">
+      <p className="pb-2 text-muted-foreground">
         Den er nå vellykket lagret i vårt system og er klar for å deles med
         andre.
       </p>
