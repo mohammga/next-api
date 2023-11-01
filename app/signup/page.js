@@ -2,7 +2,7 @@ import SignupForm from "@/components/form/SignupForm";
 
 export const metadata = {
   title: "Opprett konto - Pollify",
-  description: "Poll...",
+  description: "Opprett en ny konto på Pollify for å delta i avstemninger og få tilgang til eksklusive funksjoner.",
 };
 
 function SignupPage() {
@@ -12,4 +12,5 @@ function SignupPage() {
     </div>
   );
 }
+
 export default SignupPage;

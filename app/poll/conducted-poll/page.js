@@ -2,13 +2,13 @@ import ConductedPoll from "@/components/poll/conducted-poll/ConductedPoll";
 
 export const metadata = {
   title: "Gjennomførte poll - Pollify",
-  description: "Poll...",
+  description: "Se resultater og detaljer fra tidligere polls på Pollify.",
 };
 
 function ConductedPollPage() {
   return (
     <div>
-      <ConductedPoll/>
+      <ConductedPoll />
     </div>
   );
 }
