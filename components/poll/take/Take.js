@@ -86,7 +86,7 @@ return (
         </div>
 
     ) : !isFinished ? (
-      <TakePoll data={pollData} onFinish={handleFinish} />
+      <TakePoll data={pollData} onFinish={handleFinish} isLoading={isFinished} setIsLoading={setIsLoading} />
     ) : (
       <TakePollResult
         questions={pollData}

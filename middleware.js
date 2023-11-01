@@ -24,7 +24,7 @@ export async function middleware(req) {
 
   } else {
     // If the user is not authenticated and tries to access the protected page, redirect them to the login page
-    if (req.nextUrl.pathname === "/poll") {
+    if (req.nextUrl.pathname.startsWith("/poll")) {
       return NextResponse.redirect(loginPage);
     }
   }

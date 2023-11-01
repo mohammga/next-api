@@ -17,11 +17,6 @@ import { ChevronLeftIcon, Share1Icon } from "@radix-ui/react-icons";
 
 export default function PollResult({ pollURL }) {
   const router = useRouter();
-
-  const handleView = () => {
-    router.push(pollURL);
-  };
-
   const handleBack = () => {
     router.push("/poll/my-poll");
   };
