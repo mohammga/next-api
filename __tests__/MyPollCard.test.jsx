@@ -26,7 +26,8 @@ describe("MyPollCard", () => {
   });
 
   it("renders MyPollCard description correctly", () => {
-    expect(screen.getByText("Pick your ideal holiday destination from the provided options.")).toBeInTheDocument();
+    expect(
+      screen.getByText("Pick your ideal holiday destination from the provi...")).toBeInTheDocument();
   });
 
   it("renders the 'Se poll' button correctly", () => {

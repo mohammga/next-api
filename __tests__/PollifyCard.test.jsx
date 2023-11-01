@@ -30,11 +30,11 @@ describe("PollifyCard", () => {
   });
 
   it("renders the 'Ta poll' button correctly", () => {
-    expect(screen.getByText("Ta poll")).toBeInTheDocument();
+    expect(screen.getByText("Ta Poll")).toBeInTheDocument();
   });
 
   it("triggers poll action when 'Ta poll' is clicked", () => {
-    const taPollButton = screen.getByText("Ta poll");
+    const taPollButton = screen.getByText("Ta Poll");
     taPollButton.click();
     expect(mockPush).toHaveBeenCalled();
   });
