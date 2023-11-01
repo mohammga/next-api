@@ -72,7 +72,7 @@ export default function PollNavigation() {
   return (
     <section
       className={`w-full px-4 md:px-6 lg:px-8 border-b border-border bg-background ${
-        isFixed ? 'fixed top-0 left-0' : ''
+        isFixed ? 'fixed z-50 top-0 left-0' : ''
       } ${
         showMobileMenu && isFixed
           ? ''
