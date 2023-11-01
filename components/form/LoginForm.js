@@ -41,7 +41,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-40 lg:px-8">
+    <div className="flex h-full flex-1 flex-col justify-center md:px-6 py-40 lg:px-8">
       <div className="py-5">
         <h2 className=" text-center text-2xl font-bold leading-9 tracking-tight">
           Logg inn

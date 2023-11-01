@@ -46,9 +46,9 @@ function Pollify() {
       ) : (
         <div className="py-4">
           <h2 className="pb-2 text-xl font-semibold">Pollify Community</h2>
-          <p className="pb-2">
-            Det ser ut til at det ikke finnes noen poll i Pollify Community
-            ennå eller du har gjennomført alle pollene.
+          <p className="pb-2 text-muted-foreground">
+            Det ser ut til at det ikke finnes noen poll i Pollify Community ennå
+            eller du har gjennomført alle pollene.
           </p>
 
           <Button onClick={handleCreate}>Opprett en poll</Button>

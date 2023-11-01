@@ -49,7 +49,10 @@ function MyPoll() {
       ) : (
         <div className="py-4">
           <h2 className="pb-2 text-xl font-semibold">Mine Poll</h2>
-          <p className="pb-2">Du har ikke opprettet noen poll ennå. Klar for å opprette din første?</p>
+          <p className="pb-2 text-muted-foreground">
+            Du har ikke opprettet noen poll ennå. Klar for å opprette din
+            første?
+          </p>
           <Button onClick={handleCreate}>Opprett en poll</Button>
         </div>
       )}

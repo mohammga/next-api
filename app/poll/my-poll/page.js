@@ -7,9 +7,9 @@ export const metadata = {
 
 function MyPollPage() {
   return (
-    <div>
+    <>
       <MyPoll />
-    </div>
+    </>
   );
 }
 

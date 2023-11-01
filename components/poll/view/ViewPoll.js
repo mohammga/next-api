@@ -31,8 +31,9 @@ function ViewPoll({ data }) {
   };
 
   return (
-    <div className="w-full my-2 rounded-lg">
-      <h1 className="text-2xl font-bold mb-4">{data.title}</h1>
+    <div className="flex justify-center h-full">
+    <div className="w-full md:w-[700px] my-4 rounded-lg">
+      <h1 className="text-2xl font-bold mb-2">{data.title}</h1>
       <p className="text-muted-foreground mb-4">{data.description}</p>
       {data.questions.map((question, index) => (
         <div key={index} className="p-4 border border-border rounded-md mb-4">
@@ -50,13 +51,13 @@ function ViewPoll({ data }) {
       ))}
       <div className="flex gap-4 mt-4">
         <Button variant="outline" onClick={handleBack}>
-         <ChevronLeftIcon className="h-4 w-4 mr-1" />
+          <ChevronLeftIcon className="h-4 w-4 mr-1" />
           Tilbake
         </Button>
         <Dialog>
           <DialogTrigger asChild>
             <Button>
-            <Share1Icon className="h-4 w-4 mr-2" />
+              <Share1Icon className="h-4 w-4 mr-2" />
               Del Lenke
             </Button>
           </DialogTrigger>
@@ -74,7 +75,9 @@ function ViewPoll({ data }) {
                 </Label>
                 <Input
                   id="link"
-                  defaultValue={process.env.NEXT_PUBLIC_URL + "/poll/" + data.id}
+                  defaultValue={
+                    process.env.NEXT_PUBLIC_URL + "/poll/" + data.id
+                  }
                 />
               </div>
               <Button
@@ -97,6 +100,7 @@ function ViewPoll({ data }) {
           </DialogContent>
         </Dialog>
       </div>
+    </div>
     </div>
   );
 }

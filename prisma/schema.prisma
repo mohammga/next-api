@@ -51,8 +51,7 @@ model ConductedPoll {
   poll      Poll     @relation(fields: [pollId], references: [id])
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  startedAt DateTime @default(now())
-  endedAt   DateTime @updatedAt
+  conductedAt DateTime @default(now())
   answers   Answer[]
 }
 

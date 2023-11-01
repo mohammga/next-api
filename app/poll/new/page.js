@@ -7,8 +7,8 @@ export const metadata = {
 
 export default function NewPoll() {
   return (
-    <div>
+    <>
       <New />
-    </div>
+    </>
   );
 }

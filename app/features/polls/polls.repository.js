@@ -4,14 +4,14 @@ export const findMany = async ({ id }) => {
   try {
     const conductedPolls = await prisma.conductedPoll.findMany({
       where: {
-        userId: id
+        userId: id,
       },
       select: {
-        pollId: true
-      }
+        pollId: true,
+      },
     });
 
-    const conductedPollIds = conductedPolls.map(p => p.pollId);
+    const conductedPollIds = conductedPolls.map((p) => p.pollId);
 
     const polls = await prisma.poll.findMany({
       where: {
@@ -19,8 +19,8 @@ export const findMany = async ({ id }) => {
           not: id,
         },
         id: {
-          notIn: conductedPollIds
-        }
+          notIn: conductedPollIds,
+        },
       },
       select: {
         id: true,
@@ -28,6 +28,10 @@ export const findMany = async ({ id }) => {
         description: true,
         createdAt: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 12,
     });
     return { success: true, data: polls };
   } catch (error) {
@@ -35,6 +39,7 @@ export const findMany = async ({ id }) => {
     return { success: false, error: "Failed finding polls" };
   }
 };
+
 
 
 
@@ -51,6 +56,9 @@ export const findUserPolls = async (identifier) => {
         createdAt: true,
         authorId: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     return { success: true, data: polls };
   } catch (error) {
@@ -58,6 +66,7 @@ export const findUserPolls = async (identifier) => {
     return { success: false, error: "Failed finding user polls" };
   }
 };
+
 
 export const findConductedPolls = async (identifier) => {
   try {
@@ -68,6 +77,7 @@ export const findConductedPolls = async (identifier) => {
       select: {
         id: true,
         userId: true,
+        conductedAt: true,
         poll: {
           select: {
             id: true,
@@ -78,6 +88,9 @@ export const findConductedPolls = async (identifier) => {
           },
         },
       },
+      orderBy: {
+       conductedAt: "desc",
+      },
     });
     return { success: true, data: polls };
   } catch (error) {
@@ -85,8 +98,6 @@ export const findConductedPolls = async (identifier) => {
     return { success: false, error: "Failed finding user conducted polls" };
   }
 };
-
-
 
 export const create = async ({ title, description, questions, userId }) => {
 

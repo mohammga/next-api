@@ -94,9 +94,10 @@ export default function Test({
       {({ handleChange, handleBlur, values, errors }) => (
         <div className="flex justify-center h-full">
           <div className="flex w-full md:w-[700px] flex-col">
-            <h1 className="text-3xl font-bold pt-4 pb-2">Opprett en ny poll</h1>
+            <h1 className="text-2xl font-bold pt-4 pb-2">Opprett en ny poll</h1>
             <p className="text-md text-muted-foreground pb-4">
-              Nedenfor kan du lage...
+              Opprett en ny poll nedenfor med opptil 10 spørsmål og 6
+              svaralternativer per spørsmål.
             </p>
             <Form className="w-full">
               <FieldArray name="polls">
@@ -104,7 +105,7 @@ export default function Test({
                   <div className="space-y-6">
                     {values.polls.map((question, questionIndex) => (
                       <div
-                        className="border border-border shadow rounded-2xl p-9"
+                        className="border border-border shadow rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-9"
                         key={questionIndex}
                       >
                         {questionIndex === 0 && (
@@ -234,7 +235,7 @@ export default function Test({
                                         />
                                         {optionIndex > 1 && (
                                           <Button
-                                          disabled={isLoading}
+                                            disabled={isLoading}
                                             onClick={() =>
                                               removeOption(optionIndex)
                                             }

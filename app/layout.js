@@ -39,10 +39,10 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
           >
-            <main>
-              <Navigation />
-              <div className="px-4 md:px-6 lg:px-8 h-screen">{children}</div>
-            </main>
+            <Navigation />
+            <div className="h-[calc(100vh-65px)] px-4 md:px-6 lg:px-8">
+              {children}
+            </div>
           </ThemeProvider>
         </Providers>
       </body>

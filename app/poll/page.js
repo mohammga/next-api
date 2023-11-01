@@ -7,9 +7,9 @@ export const metadata = {
 
 function PollDashboard() {
   return (
-    <div>
+    <>
       <Pollify />
-    </div>
+    </>
   );
 }
 

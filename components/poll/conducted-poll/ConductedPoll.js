@@ -48,7 +48,7 @@ function ConductedPoll() {
       ) : (
         <div className="py-4">
           <h2 className="pb-2 text-xl font-semibold">Gjennomførte Poll</h2>
-          <p className="pb-2">
+          <p className="pb-2 text-muted-foreground">
             Du har ikke gjennomført noen poll ennå. Hva med å ta en nå?
           </p>
 

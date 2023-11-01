@@ -62,41 +62,46 @@ export default function Take() {
 
 
 return (
-<div>
-  {hasTakenPoll ? (
-    <div className="py-4">
-    <p className="pb-2">Du har allerede gjennomført denne pollen og kan ikke ta den på nytt.</p>
-    <Button onClick={handleBack}>Ta en annen poll</Button>
-
-    </div>
-    
-  ) : hasError ? (
-    <div className="py-4">
-    <p className="pb-2">Pollen du prøver å tilgang til eksisterer ikke, ta en annen poll.</p>
-    <Button onClick={handleBack}>Ta en annen poll</Button>
-
-    </div>
-
-  ) : pollData ? (
-    session?.user?.id === pollData.authorId ? (
-        <div className="py-4">
-        <p className="pb-2">Du kan ikke gjennomføre denne pollen, fordi du er forfatteren.</p>
+  <div>
+    {hasTakenPoll ? (
+      <div className="py-4">
+        <p className="pb-2 text-muted-foreground">
+          Du har allerede gjennomført denne pollen og kan ikke ta den på nytt.
+        </p>
         <Button onClick={handleBack}>Ta en annen poll</Button>
-
+      </div>
+    ) : hasError ? (
+      <div className="py-4">
+        <p className="pb-2 text-muted-foreground">
+          Pollen du prøver å tilgang til eksisterer ikke, ta en annen poll.
+        </p>
+        <Button onClick={handleBack}>Ta en annen poll</Button>
+      </div>
+    ) : pollData ? (
+      session?.user?.id === pollData.authorId ? (
+        <div className="py-4">
+          <p className="pb-2 text-muted-foreground">
+            Du kan ikke gjennomføre denne pollen, fordi du er forfatteren.
+          </p>
+          <Button onClick={handleBack}>Ta en annen poll</Button>
         </div>
-
-    ) : !isFinished ? (
-      <TakePoll data={pollData} onFinish={handleFinish} isLoading={isFinished} setIsLoading={setIsLoading} />
+      ) : !isFinished ? (
+        <TakePoll
+          data={pollData}
+          onFinish={handleFinish}
+          isLoading={isFinished}
+          setIsLoading={setIsLoading}
+        />
+      ) : (
+        <TakePollResult
+          questions={pollData}
+          answers={userAnswers}
+          onRestart={handleRestart}
+        />
+      )
     ) : (
-      <TakePollResult
-        questions={pollData}
-        answers={userAnswers}
-        onRestart={handleRestart}
-      />
-    )
-  ) : (
-    <p className="py-4">Laster inn...</p>
-  )}
-</div>
-)
+      <p className="py-4">Laster inn...</p>
+    )}
+  </div>
+);
 }

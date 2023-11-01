@@ -39,9 +39,10 @@ export function View() {
     <div>
       {hasError ? (
         <div className="py-4">
-        <p className="pb-2">Pollen du prøver å se eksisterer ikke, ta en annen poll.</p>
-        <Button onClick={handleBack}>Ta en annen poll</Button>
-   
+          <p className="pb-2 text-muted-foreground">
+            Pollen du prøver å se eksisterer ikke, ta en annen poll.
+          </p>
+          <Button onClick={handleBack}>Ta en annen poll</Button>
         </div>
       ) : pollData ? (
         <ViewPoll data={pollData} pollId={id} />
