@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from 'react';
-import PollStart from "@/components/poll/new/PollStart"
-import PollResult from '@/components/poll/new/PollResult';
+import NewPollStart from "@/components/poll/new/NewPollStart"
+import NewPollResult from '@/components/poll/new/NewPollResult';
 import { useSession } from 'next-auth/react';
-import Test from '@/components/poll/new/Test';
+import NewPollForm from '@/components/poll/new/NewPollForm';
 
 
 export default function New() {
@@ -22,7 +22,7 @@ export default function New() {
   return (
     <>
       {currentStep === 1 && (
-        <PollStart
+        <NewPollStart
           pollTitle={pollTitle}
           setPollTitle={setPollTitle}
           pollDescription={pollDescription}
@@ -30,10 +30,10 @@ export default function New() {
           nextStep={nextStep} />
       )}
       {currentStep === 2 && !showResult && (
-          <Test pollTitle={pollTitle} pollDescription={pollDescription} session={session} setPollURL={setPollURL} setShowResult={setShowResult} />
+          <NewPollForm pollTitle={pollTitle} pollDescription={pollDescription} session={session} setPollURL={setPollURL} setShowResult={setShowResult} />
       )}
       {showResult && (
-        <PollResult pollURL={pollURL} />
+        <NewPollResult pollURL={pollURL} />
       )}
     </>
   );

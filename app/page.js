@@ -2,7 +2,7 @@ import LoginForm from "@/components/form/LoginForm";
 
 export const metadata = {
   title: "Logg inn - Pollify",
-  description: "Poll...",
+  description: "Logg inn på Pollify for å få tilgang til din konto.",
 };
 
 function Homepage() {
@@ -12,4 +12,5 @@ function Homepage() {
     </div>
   );
 }
+
 export default Homepage;

@@ -2,13 +2,13 @@ import Pollify from "@/components/poll/pollify/Pollify";
 
 export const metadata = {
   title: "Pollify community - Pollify",
-  description: "Poll...",
+  description: "Bli en del av Pollify-fellesskapet, opprett, delta og diskuter avstemninger."
 };
 
 function PollDashboard() {
   return (
     <div>
-      <Pollify/>
+      <Pollify />
     </div>
   );
 }
