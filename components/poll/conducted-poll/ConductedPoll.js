@@ -42,7 +42,7 @@ function ConductedPoll() {
   }
 
   return (
-    <div>
+    <>
       {conductedPolls.length > 0 ? (
         <ConductedPollGrid data={conductedPolls} title={"Gjennomførte Poll"} />
       ) : (
@@ -55,7 +55,7 @@ function ConductedPoll() {
           <Button onClick={handleStart}>Ta en poll</Button>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

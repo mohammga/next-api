@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 export default function Take() {
   const [hasTakenPoll, setHasTakenPoll] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-  const [userAnswers, setUserAnswers] = useState([]);
   const [pollData, setPollData] = useState(null);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,14 +20,12 @@ export default function Take() {
   const params = useParams();
   const { id } = params;
 
-  const handleFinish = (answers) => {
-    setUserAnswers(answers);
+  const handleFinish = () => {
     setIsFinished(true);
   };
 
   const handleRestart = () => {
     setIsFinished(false);
-    setUserAnswers([]);
     router.push("/poll/conducted-poll");
   };
 
@@ -62,7 +59,7 @@ export default function Take() {
 
 
 return (
-  <div>
+  <>
     {hasTakenPoll ? (
       <div className="py-4">
         <p className="pb-2 text-muted-foreground">
@@ -89,19 +86,17 @@ return (
         <TakePollForm
           data={pollData}
           onFinish={handleFinish}
-          isLoading={isFinished}
+          isLoading={isLoading}
           setIsLoading={setIsLoading}
         />
       ) : (
         <TakePollResult
-          questions={pollData}
-          answers={userAnswers}
           onRestart={handleRestart}
         />
       )
     ) : (
       <p className="py-4">Laster inn...</p>
     )}
-  </div>
+  </>
 );
 }

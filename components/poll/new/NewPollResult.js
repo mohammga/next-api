@@ -65,6 +65,7 @@ export default function PollResult({ pollURL }) {
                 <Input
                   id="link"
                   defaultValue={`${process.env.NEXT_PUBLIC_URL}${pollURL}`}
+                  className="cursor-copy"
                   readOnly
                 />
               </div>

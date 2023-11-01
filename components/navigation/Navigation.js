@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { MoonIcon, SunIcon, LaptopIcon, PlusIcon } from "@radix-ui/react-icons";
@@ -29,22 +29,40 @@ export default function PollNavigation() {
   const router = useRouter();
   const pathname = usePathname();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
 
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
   };
+
+
+   useEffect(() => {
+     const handleScroll = () => {
+       if (window.scrollY > 100) {
+         setIsFixed(true);
+       } else {
+         setIsFixed(false);
+       }
+     };
+
+     window.addEventListener('scroll', handleScroll);
+
+     return () => {
+       window.removeEventListener('scroll', handleScroll);
+     };
+   }, []);
 
   const isHome = pathname === "/";
   const isSignup = pathname === "/signup";
   const isPoll = pathname === "/poll";
   const isPollRoute = pathname.startsWith("/poll/");
 
-  const handleSignIn = () => {
-    router.push("/");
-  };
-
   const handleSignUp = () => {
     router.push("/signup");
+  };
+
+  const handleSignIn = () => {
+    router.push("/");
   };
 
   const handleSignOut = async () => {
@@ -53,7 +71,13 @@ export default function PollNavigation() {
 
   return (
     <section
-      className="w-full px-4 md:px-6 lg:px-8 border-b border-border bg-background/90"
+      className={`w-full px-4 md:px-6 lg:px-8 border-b border-border bg-background ${
+        isFixed ? 'fixed top-0 left-0' : ''
+      } ${
+        showMobileMenu && isFixed
+          ? ''
+          : 'bg-background/90 '
+      }`}
     >
       <header className="p-0">
         <div className="flex h-16 items-center justify-between py-6">
@@ -90,36 +114,36 @@ export default function PollNavigation() {
             {(isPoll || isPollRoute) && (
               <nav className="hidden gap-6 md:flex">
                 <Link
-                  href={"/poll"}
+                  href={'/poll'}
                   className={cn(
-                    "flex items-center text-lg font-medium transition-colors hover:underline hover:text-foreground/80 sm:text-sm",
-                    pathname === "/poll"
-                      ? "text-foreground"
-                      : "text-foreground/60"
+                    'flex items-center text-lg font-medium transition-colors hover:underline hover:text-foreground/80 sm:text-sm',
+                    pathname === '/poll'
+                      ? 'text-foreground'
+                      : 'text-foreground/60'
                   )}
                 >
                   Pollify Community
                 </Link>
 
                 <Link
-                  href={"/poll/my-poll"}
+                  href={'/poll/my-poll'}
                   className={cn(
-                    "flex items-center text-lg font-medium transition-colors hover:underline hover:text-foreground/80 sm:text-sm",
-                    pathname === "/poll/my-poll"
-                      ? "text-foreground"
-                      : "text-foreground/60"
+                    'flex items-center text-lg font-medium transition-colors hover:underline hover:text-foreground/80 sm:text-sm',
+                    pathname === '/poll/my-poll'
+                      ? 'text-foreground'
+                      : 'text-foreground/60'
                   )}
                 >
                   Mine Poll
                 </Link>
 
                 <Link
-                  href={"/poll/conducted-poll"}
+                  href={'/poll/conducted-poll'}
                   className={cn(
-                    "flex items-center text-lg font-medium transition-colors hover:underline hover:text-foreground/80 sm:text-sm",
-                    pathname === "/poll/conducted-poll"
-                      ? "text-foreground"
-                      : "text-foreground/60"
+                    'flex items-center text-lg font-medium transition-colors hover:underline hover:text-foreground/80 sm:text-sm',
+                    pathname === '/poll/conducted-poll'
+                      ? 'text-foreground'
+                      : 'text-foreground/60'
                   )}
                 >
                   Gjennomførte Poll
@@ -133,10 +157,10 @@ export default function PollNavigation() {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link
-                      href={"/poll/new"}
+                      href={'/poll/new'}
                       className={buttonVariants({
-                        variant: "outline",
-                        size: "icon",
+                        variant: 'outline',
+                        size: 'icon'
                       })}
                     >
                       <PlusIcon className="h-[1.2rem] w-[1.2rem]" />
@@ -157,15 +181,15 @@ export default function PollNavigation() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
+                <DropdownMenuItem onClick={() => setTheme('light')}>
                   <SunIcon className="mr-2 h-4 w-4" /> Lyst
                 </DropdownMenuItem>
 
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                <DropdownMenuItem onClick={() => setTheme('dark')}>
                   <MoonIcon className="mr-2 h-4 w-4" /> Mørkt
                 </DropdownMenuItem>
 
-                <DropdownMenuItem onClick={() => setTheme("system")}>
+                <DropdownMenuItem onClick={() => setTheme('system')}>
                   <LaptopIcon className="mr-2 h-4 w-4" /> System
                 </DropdownMenuItem>
               </DropdownMenuContent>

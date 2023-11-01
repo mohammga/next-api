@@ -36,7 +36,7 @@ export function View() {
   }
 
   return (
-    <div>
+    <>
       {hasError ? (
         <div className="py-4">
           <p className="pb-2 text-muted-foreground">
@@ -49,7 +49,7 @@ export function View() {
       ) : (
         <p className="py-4">Laster inn...</p>
       )}
-    </div>
+    </>
   );
 }
 

@@ -40,7 +40,7 @@ function Pollify() {
   }
 
   return (
-    <div>
+    <>
       {pollifyPolls.length > 0 ? (
         <PollifyCardGrid data={pollifyPolls} title={"Pollify Community"} />
       ) : (
@@ -54,7 +54,7 @@ function Pollify() {
           <Button onClick={handleCreate}>Opprett en poll</Button>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

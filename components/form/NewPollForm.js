@@ -43,15 +43,15 @@ export default function NewPollForm({
 
   const handleSubmit = async (values) => {
     const pollData = {
-      title: values.pollTitle,
+      title: capitalizeString(values.pollTitle),
       email: session?.user?.email,
-      description: values.pollDescription,
-      questions: values.polls.map((poll) => ({
+      description: capitalizeString(values.pollDescription),
+      questions: values.polls.map(poll => ({
         title: capitalizeString(poll.questionTitle),
-        options: poll.questionOptions.map((option) => ({
-          title: capitalizeString(option.option),
-        })),
-      })),
+        options: poll.questionOptions.map(option => ({
+          title: capitalizeString(option.option)
+        }))
+      }))
     };
 
     try {
@@ -170,7 +170,7 @@ export default function NewPollForm({
                           </div>
                         )}
 
-                        <div className="mt-6">
+                        <div className={questionIndex === 0 ? 'mt-6' : ''}>
                           <div className="pb-2">
                             <Label
                               htmlFor={`polls.${questionIndex}.questionTitle`}
@@ -209,7 +209,11 @@ export default function NewPollForm({
                         </div>
                         <div className="mt-6">
                           <div className="pb-2">
-                            <Label>Svaralternativer</Label>
+                            <Label
+                              htmlFor={`polls.${questionIndex}.questionOptions`}
+                            >
+                              Svaralternativer
+                            </Label>
                           </div>
                           <FieldArray
                             name={`polls.${questionIndex}.questionOptions`}
@@ -258,7 +262,7 @@ export default function NewPollForm({
                                 )}
                                 {question.questionOptions.length < 6 && (
                                   <Button
-                                    onClick={() => pushOption({ option: "" })}
+                                    onClick={() => pushOption({ option: '' })}
                                     disabled={isLoading}
                                     variant="outline"
                                     type="button"
@@ -281,8 +285,8 @@ export default function NewPollForm({
                           disabled={isLoading}
                           onClick={() =>
                             push({
-                              questionTitle: "",
-                              questionOptions: [{ option: "" }, { option: "" }],
+                              questionTitle: '',
+                              questionOptions: [{ option: '' }, { option: '' }]
                             })
                           }
                         >
@@ -327,7 +331,7 @@ export default function NewPollForm({
                               Oppretter poll...
                             </>
                           ) : (
-                            "Opprett poll"
+                            'Opprett poll'
                           )}
                         </Button>
                       </div>

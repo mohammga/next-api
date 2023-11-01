@@ -43,7 +43,7 @@ function MyPoll() {
   }
 
   return (
-    <div>
+    <>
       {myPolls.length > 0 ? (
         <MyPollGrid data={myPolls} title={"Mine Poll"} />
       ) : (
@@ -56,7 +56,7 @@ function MyPoll() {
           <Button onClick={handleCreate}>Opprett en poll</Button>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
