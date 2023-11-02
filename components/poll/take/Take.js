@@ -55,7 +55,7 @@ export default function Take() {
         console.error("Failed to fetch poll data:", error);
         setHasError(true);
       });
-  }, []);
+  }, [id]);
 
 
 return (

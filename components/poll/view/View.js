@@ -29,7 +29,7 @@ export function View() {
           console.error('Failed to fetch poll data:', error);
           setHasError(true);
         });
-  }, []);
+  }, [id]);
 
   const handleBack = () => {
     router.push("/poll");
