@@ -14,7 +14,7 @@ describe("ConductedCard", () => {
     id: "Conducted1",
     title: "Favorite Sport?",
     description: "Choose your preferred sport from the list below.",
-    createdAt: "2022-03-15T00:00:00.000Z",
+    conductedAt: "2022-03-15T00:00:00.000Z",
   };
 
   beforeEach(() => {
