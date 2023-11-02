@@ -10,17 +10,17 @@ Før du kan bruke Pollify, må du opprette en .env-fil og fylle inn de nødvendi
 
 Besøk https://pollify.vercel.app/ for å få tilgang til applikasjonen.
 
-## Trinn 3: Registrering
+## Trinn 3: Opprett konto
 
-1. Klikk på "Registrer deg" for å opprette en konto.
+1. Klikk på "Opprett konto" for å opprette en konto.
 2. Fyll ut skjemaet med ditt navn, e-postadresse og passord.
-3. Passordet blir sikret ved hjelp av salt og hashing for sikker lagring.
-4. Klikk "Registrer deg" for å opprette kontoen.
+3. Passordet blir sikret ved hjelp av salting og hashing for sikker lagring.
+4. Klikk "Opprett konto" for å opprette kontoen.
 
 ## Trinn 4: Logg inn
 
-1. Etter registrering kan du logge deg inn ved å fylle ut dine registrerte opplysninger.
-2. Etter vellykket innlogging vil du få tilgang til en økt som varer i 24 timer.
+1. Etter oppretelse av konto kan du logge deg inn ved å fylle ut dine registrerte opplysninger.
+2. Etter vellykket innlogging vil du få tilgang til en session som varer i 24 timer.
 
 ## Trinn 5: Deltakelse i avstemninger
 
@@ -28,7 +28,7 @@ Besøk https://pollify.vercel.app/ for å få tilgang til applikasjonen.
 
 ## Trinn 6: Administrere egne avstemninger
 
-- Under "Mine avstemninger" finner du alle dine nyeste avstemninger. Her kan du se hvordan avstemningene ser ut for brukerne som tar dem.
+- Under "Mine poll" finner du alle dine nyeste avstemninger. Her kan du se hvordan avstemningene ser ut for brukerne som tar dem.
 
 ## Trinn 7: Gjennomførte avstemninger
 
