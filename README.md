@@ -8,7 +8,7 @@ Før du kan bruke Pollify, må du opprette en .env-fil og fylle inn de nødvendi
 
 ## Trinn 2: Test nettstedet
 
-Besøk [https://pollify.vercel.app/](lenke til siden) for å få tilgang til applikasjonen.
+Besøk [https://pollify.vercel.app/] for å få tilgang til applikasjonen.
 
 ## Trinn 3: Registrering
 
