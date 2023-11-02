@@ -12,7 +12,7 @@ function ConductedPollGird({ data, title }) {
             key={index}
             title={conductedPoll.poll.title}
             description={conductedPoll.poll.description}
-            createdAt={conductedPoll.poll.createdAt}
+            conductedAt={conductedPoll.conductedAt}
           />
         ))}
       </div>

@@ -15,8 +15,8 @@ import { CheckCircle2 } from "lucide-react";
 import { format } from "date-fns";
 import { nb } from "date-fns/locale";
 
-function ConductedCard({ title, description, createdAt }) {
-  const formattedDate = format(new Date(createdAt), "PPP", { locale: nb });
+function ConductedCard({ title, description, conductedAt }) {
+  const formattedDate = format(new Date(conductedAt), "PPP", { locale: nb });
 
   const randomBackgroundColor = getRandomColor();
 
@@ -32,7 +32,7 @@ function ConductedCard({ title, description, createdAt }) {
             ></div>
           </div>
           <CardDescription className="font-light py-1">
-            Publisert: {formattedDate}
+            Gjennomført: {formattedDate}
           </CardDescription>
           <CardTitle>{title}</CardTitle>
         </CardHeader>
